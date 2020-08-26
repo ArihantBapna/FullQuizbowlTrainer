@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FullQuizbowlTrainer.Interfaces;
 using FullQuizbowlTrainer.Models;
@@ -16,18 +15,18 @@ namespace FullQuizbowlTrainer.Services.Database
             dbConnection = DependencyService.Get<IDBInterface>().CreateConnection();
         }
 
-        public async Task<List<AnswersModel>> GetAllAnswers()
+        public async Task<List<Answers>> GetAllAnswers()
         {
-            //return await dbConnection.QueryAsync<AnswersModel>("Select * From [Answers]");
-            return await dbConnection.Table<AnswersModel>().ToListAsync();
+            //Query for this takes about 1.5s on avg. 
+            return await dbConnection.Table<Answers>().ToListAsync();
         }
 
-        public async Task<List<QuestionsModel>> GetAllQuestions()
+        public async Task<List<Questions>> GetAllQuestions()
         {
-            return await dbConnection.QueryAsync<QuestionsModel>("Select * From [Questions]");
+            return await dbConnection.QueryAsync<Questions>("Select * From [Questions]");
         }
 
-        public async Task<int> SaveEmployeeAsync(QuestionsModel q)
+        public async Task<int> SaveEmployeeAsync(Questions q)
 
         {
             return await dbConnection.InsertAsync(q);

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace FullQuizbowlTrainer.Models
 {
-    public class AnswersModel
+    public class Answers
     {
         public string Answer { get; set; }
         public int Category { get; set; }
