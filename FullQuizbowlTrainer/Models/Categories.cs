@@ -11,6 +11,7 @@ namespace FullQuizbowlTrainer.Models
         private string name;
         private int user;
         private double percent;
+        private double max;
 
 
         public int Id
@@ -47,7 +48,17 @@ namespace FullQuizbowlTrainer.Models
             {
                 percent = value;
                 OnPropertyChanged("Percent");
-                MessagingCenter.Send(this, "Hi");
+                MessagingCenter.Send(this, "UpdateTotal");
+            }
+        }
+
+        public double Max
+        {
+            get { return max; }
+            set
+            {
+                max = value;
+                OnPropertyChanged("Max");
             }
         }
 

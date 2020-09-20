@@ -25,11 +25,13 @@ namespace FullQuizbowlTrainer.ViewModels
 
         public void Subscribe()
         {
-            MessagingCenter.Subscribe<Categories>(this, "Hi", (sender) => {
+            MessagingCenter.Subscribe<Categories>(this, "UpdateTotal", (sender) => {
                 CalculateTotal();
                 Console.WriteLine("Calculated total");
             });
         }
+
+        public static double Total = 0;
 
         private double totalAvailable;
         public double TotalAvailable
@@ -39,6 +41,7 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 totalAvailable = value;
                 OnPropertyChanged("TotalAvailable");
+                Total = TotalAvailable;
             }
         }
 
@@ -46,6 +49,7 @@ namespace FullQuizbowlTrainer.ViewModels
         {
             CategoryData = new ObservableCollection<Categories>(categoryDat);
             CalculateTotal();
+            Subscribe();
         }
         
 
