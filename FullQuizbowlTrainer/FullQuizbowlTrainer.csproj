@@ -16,6 +16,9 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.2.0.58" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.58" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="18.2.0.58" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="18.2.0.58" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -24,5 +27,11 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Database\" />
+    <Folder Include="Services\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Models\Categories.cs">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Compile>
   </ItemGroup>
 </Project>

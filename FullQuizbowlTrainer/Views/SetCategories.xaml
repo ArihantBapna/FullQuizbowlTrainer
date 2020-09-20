@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" x:Class="FullQuizbowlTrainer.Views.SetCategories">
+<ContentPage xmlns:converter="clr-namespace:FullQuizbowlTrainer.Services.Converters" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms" xmlns:syncfusion1="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms" x:Class="FullQuizbowlTrainer.Views.SetCategories">
     <ContentPage.Resources>
 
         <ResourceDictionary>
@@ -12,41 +12,69 @@
                  <Color>#0050EF</Color> <!-- Cobalt -->
                  <Color>Lime</Color>
                  <Color>Orange</Color>
-                 <Color>Yellow</Color>
+                 <Color>YellowGreen</Color>
                  <Color>Sienna</Color>
                  <Color>Violet</Color>
             </chart:ChartColorCollection>
+            
         </ResourceDictionary>
+
+        <ResourceDictionary>
+            <converter:NameToColourConverter x:Key="NameToColour"></converter:NameToColourConverter>
+        </ResourceDictionary>
+
+    <ResourceDictionary>
+        <DataTemplate x:Key="dataMarkerTemplate">
+            <StackLayout Padding="3" Orientation="Horizontal" BackgroundColor="{Binding Source={x:Reference dataLabel}, Path=Text.Length, ConverterParameter={x:Reference dataLabel}, Converter={StaticResource NameToColour}}">
+                <Label x:Name="dataLabel" Text="{Binding Name}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start" FontSize = "13"/>
+                <Label Text="{Binding Percent}" TextColor="White" HorizontalOptions="End" FontSize="13" VerticalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>    
+    </ResourceDictionary>
 
     </ContentPage.Resources>
 
 
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
+            <Grid BackgroundColor="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" Orientation="Vertical">
-                    
+                <StackLayout Grid.Row="1" Orientation="Vertical">
+                    <syncfusion:SfListView ItemSpacing="0" x:Name="CategoriesList" ItemsSource="{Binding CategoryData}" SelectionMode="None">
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid BackgroundColor="{Binding Source={x:Reference label}, Path=Text.Length, ConverterParameter={x:Reference label}, Converter={StaticResource NameToColour}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label x:Name="label" Grid.Row="0" Grid.Column="0" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                    <StackLayout WidthRequest="100" Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
+                                         <syncfusion1:SfNumericTextBox x:Name="numBox" Minimum="0" BorderColor="White" Visual="Material" TextColor="White" Value="{Binding Percent}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
+                    <Label Text="{Binding TotalAvailable}" TextColor="Black" FontSize="Medium"></Label>
                 </StackLayout>
-                <StackLayout Grid.Row="1">
-                    <chart:SfChart AreaBackgroundColor="Transparent">
-                        <chart:SfChart.Legend>
-                            <chart:ChartLegend OverflowMode="Wrap" DockPosition="Bottom" Orientation="Horizontal"/>
-                        </chart:SfChart.Legend>
-                        <chart:DoughnutSeries DoughnutCoefficient="0.6" CircularCoefficient="0.85" ItemsSource ="{Binding CategoryData}" XBindingPath="Name" YBindingPath="Percent" EnableSmartLabels="True"> 
-                            <chart:DoughnutSeries.DataMarker>
-                                <chart:ChartDataMarker LabelContent="DataMarkerLabel"/>
-                            </chart:DoughnutSeries.DataMarker>
+                <StackLayout Grid.Row="0" VerticalOptions="Center">
+                    <chart:SfChart AreaBackgroundColor="Transparent" VerticalOptions="Center" HeightRequest="300">
+                        <chart:DoughnutSeries EnableAnimation="True" ListenPropertyChange="True" DoughnutCoefficient="0.6" CircularCoefficient="0.5" ItemsSource ="{Binding CategoryData}" XBindingPath="Name" YBindingPath="Percent" ConnectorLineType="Bezier" EnableSmartLabels="True" DataMarkerPosition="OutsideExtended"> 
                             <chart:DoughnutSeries.ColorModel>
                                 <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
                             </chart:DoughnutSeries.ColorModel>
+                            <chart:DoughnutSeries.DataMarker>
+                                <chart:ChartDataMarker ShowLabel="True" LabelTemplate="{StaticResource dataMarkerTemplate}" />
+                            </chart:DoughnutSeries.DataMarker>
                         </chart:DoughnutSeries>
                     </chart:SfChart>
                 </StackLayout>
             </Grid>
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
