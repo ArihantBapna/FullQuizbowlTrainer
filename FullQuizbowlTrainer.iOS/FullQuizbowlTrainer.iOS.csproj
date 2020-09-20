@@ -124,7 +124,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
@@ -138,9 +138,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\QAData.db" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
+    <BundleResource Include="Resources\QAData2.db" />
   </ItemGroup>
 </Project>

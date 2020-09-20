@@ -15,21 +15,21 @@ namespace FullQuizbowlTrainer.Services.Database
             dbConnection = DependencyService.Get<IDBInterface>().CreateConnection();
         }
 
-        public async Task<List<Answers>> GetAllAnswers()
+        public async Task<List<Answers>> GetAnswers()
         {
-            //Query for this takes about 1.5s on avg. 
+            // 1.5s response delay
             return await dbConnection.Table<Answers>().ToListAsync();
         }
 
-        public async Task<List<Questions>> GetAllQuestions()
+        public async Task<List<Questions>> GetQuestionsFromAnswerId(int answerId)
         {
-            return await dbConnection.QueryAsync<Questions>("Select * From [Questions]");
+            return await dbConnection.QueryAsync<Questions>("Select * From [Questions] Where [ANSWERID] = " + answerId);
         }
 
-        public async Task<int> SaveEmployeeAsync(Questions q)
-
+        public async Task<List<Categories>> GetCategoryData()
         {
-            return await dbConnection.InsertAsync(q);
+            return await dbConnection.QueryAsync<Categories>("Select * From [Categories]");
         }
+
     }
 }

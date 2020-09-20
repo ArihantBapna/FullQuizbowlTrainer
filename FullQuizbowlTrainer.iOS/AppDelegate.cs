@@ -23,6 +23,10 @@ namespace FullQuizbowlTrainer.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            //Syncfusion Loading
+            Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

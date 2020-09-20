@@ -9,6 +9,8 @@ namespace FullQuizbowlTrainer
     {
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk2OTk1QDMxMzgyZTMyMmUzMFdpM1NVWE0xNUdqUndaelI1T3F4cUFsREJubEZQbW9WS2hGUGlrRStRYkU9");
+
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());

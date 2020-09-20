@@ -16,7 +16,7 @@ namespace FullQuizbowlTrainer.Droid.Services
 
         public SQLiteAsyncConnection CreateConnection()
         {
-            var sqliteFilename = "QAData.db";
+            var sqliteFilename = "QAData2.db";
             string documentsDirectoryPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsDirectoryPath, sqliteFilename);
 

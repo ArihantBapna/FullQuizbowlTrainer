@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" x:Class="FullQuizbowlTrainer.Views.SetCategories">
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <chart:ChartColorCollection x:Key="Colors">
+                 <Color>Teal</Color>
+                 <Color>Cyan</Color>
+                 <Color>Crimson</Color>
+                 <Color>Indigo</Color>
+                 <Color>#647687</Color> <!-- Steel -->
+                 <Color>#0050EF</Color> <!-- Cobalt -->
+                 <Color>Lime</Color>
+                 <Color>Orange</Color>
+                 <Color>Yellow</Color>
+                 <Color>Sienna</Color>
+                 <Color>Violet</Color>
+            </chart:ChartColorCollection>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Orientation="Vertical">
+                    
+                </StackLayout>
+                <StackLayout Grid.Row="1">
+                    <chart:SfChart AreaBackgroundColor="Transparent">
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend OverflowMode="Wrap" DockPosition="Bottom" Orientation="Horizontal"/>
+                        </chart:SfChart.Legend>
+                        <chart:DoughnutSeries DoughnutCoefficient="0.6" CircularCoefficient="0.85" ItemsSource ="{Binding CategoryData}" XBindingPath="Name" YBindingPath="Percent" EnableSmartLabels="True"> 
+                            <chart:DoughnutSeries.DataMarker>
+                                <chart:ChartDataMarker LabelContent="DataMarkerLabel"/>
+                            </chart:DoughnutSeries.DataMarker>
+                            <chart:DoughnutSeries.ColorModel>
+                                <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
+                            </chart:DoughnutSeries.ColorModel>
+                        </chart:DoughnutSeries>
+                    </chart:SfChart>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

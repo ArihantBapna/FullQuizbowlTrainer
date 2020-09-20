@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using FullQuizbowlTrainer.Models;
 using FullQuizbowlTrainer.Services.Database;
 using FullQuizbowlTrainer.ViewModels;
 using Xamarin.Forms;
@@ -9,6 +10,7 @@ namespace FullQuizbowlTrainer.Views
 {
     public partial class MainPage : ContentPage
     {
+        List<Categories> CategoryDat = new List<Categories>();
         public MainPage()
         {
             InitializeComponent();
@@ -16,17 +18,17 @@ namespace FullQuizbowlTrainer.Views
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new QuizzingPage());
+            await Navigation.PushAsync(new SetCategories(CategoryDat));
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
             DatabaseManager dbM = new DatabaseManager();
-            var answerList = await dbM.GetAllAnswers();
-            if (answerList != null)
+            var categoryDat = await dbM.GetCategoryData();
+            if (categoryDat != null)
             {
-                QuizzingPageViewModel.AnswerList = answerList;
+                CategoryDat = categoryDat;
             }
             
         }
