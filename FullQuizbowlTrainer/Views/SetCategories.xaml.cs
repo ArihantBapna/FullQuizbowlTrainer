@@ -13,5 +13,10 @@ namespace FullQuizbowlTrainer.Views
             InitializeComponent();
             this.BindingContext = new SetCategoriesViewModel(CategoryDat);
         }
+
+        async void Button_Clicked(object sender, EventArgs args)
+        {
+            SetCategoriesViewModel.ClearContents((SetCategoriesViewModel)this.BindingContext);
+        }
     }
 }

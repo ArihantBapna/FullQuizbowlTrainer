@@ -45,6 +45,20 @@ namespace FullQuizbowlTrainer.ViewModels
             }
         }
 
+        public static void ClearContents(SetCategoriesViewModel vm)
+        {
+            ObservableCollection<Categories> vcm = new ObservableCollection<Categories>();
+            foreach(Categories c in vm.CategoryData)
+            {
+                Categories c2 = new Categories();
+                c2.Name = c.Name;
+                c2.Percent = 0;
+                vcm.Add(c2);
+            }
+            vm.CategoryData = vcm;
+            vm.CalculateTotal();
+        }
+
         public SetCategoriesViewModel(List<Categories> categoryDat)
         {
             CategoryData = new ObservableCollection<Categories>(categoryDat);

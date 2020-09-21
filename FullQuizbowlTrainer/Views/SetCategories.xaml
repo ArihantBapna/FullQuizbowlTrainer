@@ -39,9 +39,10 @@
             <Grid BackgroundColor="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="1" Orientation="Vertical">
+                <StackLayout Grid.Row="2" Orientation="Vertical">
                     <syncfusion:SfListView ItemSpacing="0" x:Name="CategoriesList" ItemsSource="{Binding CategoryData}" SelectionMode="None">
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
@@ -61,7 +62,11 @@
                             </DataTemplate>
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>
-                    <Label Text="{Binding TotalAvailable}" TextColor="Black" FontSize="Medium"></Label>
+                    <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Percent Points available to allocation" TextColor="Black" FontSize="Small" HorizontalOptions="Start"></Label>
+                        <Label Text="{Binding TotalAvailable}" TextColor="Black" FontSize="Small" HorizontalOptions="Center"></Label>
+                        <Label Text=" / 100" TextColor="Black" FontSize="Small" HorizontalOptions="End"></Label>
+                    </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Row="0" VerticalOptions="Center">
                     <chart:SfChart AreaBackgroundColor="Transparent" VerticalOptions="Center" HeightRequest="300">
@@ -74,6 +79,9 @@
                             </chart:DoughnutSeries.DataMarker>
                         </chart:DoughnutSeries>
                     </chart:SfChart>
+                </StackLayout>
+                <StackLayout Grid.Row="1">
+                    <Button Clicked="Button_Clicked" Text="Click me senpai" TextColor="White"></Button>
                 </StackLayout>
             </Grid>
     </ContentPage.Content>
