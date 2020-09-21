@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Foundation;
+using FullQuizbowlTrainer.Interfaces;
 using FullQuizbowlTrainer.iOS.Services;
 using SQLite;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace FullQuizbowlTrainer.iOS.Services
 
         public SQLiteAsyncConnection CreateConnection()
         {
-            var sqliteFilename = "QAData.db";
+            var sqliteFilename = "QAData2.db";
 
             string docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string libFolder = Path.Combine(docFolder, "..", "Library", "Databases");
@@ -30,7 +31,7 @@ namespace FullQuizbowlTrainer.iOS.Services
             // This is where we copy in the pre-created database
             if (!File.Exists(path))
             {
-                var existingDb = NSBundle.MainBundle.PathForResource("QAData", "db");
+                var existingDb = NSBundle.MainBundle.PathForResource("QAData2", "db");
                 File.Copy(existingDb, path);
             }
             var connection = new SQLiteAsyncConnection(path);

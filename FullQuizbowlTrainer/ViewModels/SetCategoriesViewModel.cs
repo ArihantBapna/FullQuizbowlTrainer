@@ -27,7 +27,6 @@ namespace FullQuizbowlTrainer.ViewModels
         {
             MessagingCenter.Subscribe<Categories>(this, "UpdateTotal", (sender) => {
                 CalculateTotal();
-                Console.WriteLine("Calculated total");
             });
         }
 

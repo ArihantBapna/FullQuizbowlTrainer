@@ -9,7 +9,6 @@ namespace FullQuizbowlTrainer.Services.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Label c = (Label)parameter;
-            Console.WriteLine(c.Text +" is the parameter value");
             if (c.Text == "Mythology") return Color.Teal;
             else if (c.Text == "Literature") return Color.Cyan;
             else if (c.Text == "Trash") return Color.Crimson;

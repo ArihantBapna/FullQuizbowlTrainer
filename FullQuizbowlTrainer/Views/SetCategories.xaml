@@ -34,15 +34,16 @@
 
     </ContentPage.Resources>
 
-
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Clicked="Button_Clicked" Text="Clear" Priority="0" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
             <Grid BackgroundColor="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="2" Orientation="Vertical">
+                <StackLayout Grid.Row="1" Orientation="Vertical">
                     <syncfusion:SfListView ItemSpacing="0" x:Name="CategoriesList" ItemsSource="{Binding CategoryData}" SelectionMode="None">
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
@@ -79,9 +80,6 @@
                             </chart:DoughnutSeries.DataMarker>
                         </chart:DoughnutSeries>
                     </chart:SfChart>
-                </StackLayout>
-                <StackLayout Grid.Row="1">
-                    <Button Clicked="Button_Clicked" Text="Click me senpai" TextColor="White"></Button>
                 </StackLayout>
             </Grid>
     </ContentPage.Content>
