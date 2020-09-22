@@ -37,6 +37,7 @@
     <ContentPage.ToolbarItems>
     <ToolbarItem Clicked="Button_Clicked" Text="Clear" Priority="0" />
     </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
             <Grid BackgroundColor="White">
                 <Grid.RowDefinitions>

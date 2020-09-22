@@ -18,7 +18,7 @@ namespace FullQuizbowlTrainer.Views
 
         async void OnButtonClicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new SetCategories(CategoryDat));
+            await Navigation.PushAsync(new SelectPreferences(CategoryDat));
         }
 
         protected async override void OnAppearing()
