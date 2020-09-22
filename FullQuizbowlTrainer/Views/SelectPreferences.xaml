@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:converter="clr-namespace:FullQuizbowlTrainer.Services.Converters" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
+<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:converter="clr-namespace:FullQuizbowlTrainer.Services.Converters" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -38,7 +38,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <syncfusion:SfListView Grid.Row="0" x:Name="Preferences" VerticalOptions="StartAndExpand" ItemSpacing="10" SelectionMode="Single" SelectedItem="{Binding SelectedPreference}" ItemsSource="{Binding SavedPreferences}">
+            <syncfusion:SfListView Grid.Row="0" x:Name="Preferences" VerticalOptions="Start" ItemSpacing="10" SelectionMode="Single" SelectedItem="{Binding SelectedPreference}" ItemsSource="{Binding SavedPreferences}">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10" BackgroundColor="Crimson">
@@ -65,15 +65,15 @@
                         </chart:DoughnutSeries.DataMarker>
                     </chart:DoughnutSeries>
                 </chart:SfChart>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="30" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <Label Text="Add New"></Label>
+                        <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Add New"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
-                        <Label Text="Edit"></Label>
+                        <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="End">
-                        <Label Text="Delete"></Label>
+                        <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

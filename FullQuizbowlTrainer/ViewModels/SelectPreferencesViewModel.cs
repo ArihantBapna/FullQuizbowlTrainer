@@ -50,7 +50,18 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 selectedPreference = value;
                 OnPropertyChanged("SelectedPreference");
+                HasSelectedItem = true;
                 SetChartValues();
+            }
+        }
+        private bool hasSelectedItem;
+        public bool HasSelectedItem
+        {
+            get { return hasSelectedItem; }
+            set
+            {
+                hasSelectedItem = value;
+                OnPropertyChanged("HasSelectedItem");
             }
         }
 
@@ -65,6 +76,7 @@ namespace FullQuizbowlTrainer.ViewModels
         {
             string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
             string keyVal = Preferences.Get("pref_keys", default_key);
+            HasSelectedItem = false;
             GetPreferences(keyVal);
         }
 

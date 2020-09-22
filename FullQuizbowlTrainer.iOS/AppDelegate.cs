@@ -31,6 +31,8 @@ namespace FullQuizbowlTrainer.iOS
             Syncfusion.XForms.iOS.TextInputLayout.SfTextInputLayoutRenderer.Init();
             Syncfusion.SfNumericUpDown.XForms.iOS.SfNumericUpDownRenderer.Init();
             new Syncfusion.SfNumericTextBox.XForms.iOS.SfNumericTextBoxRenderer();
+            Syncfusion.XForms.iOS.Border.SfBorderRenderer.Init();
+            Syncfusion.XForms.iOS.Buttons.SfButtonRenderer.Init();
 
             LoadApplication(new App());
 
