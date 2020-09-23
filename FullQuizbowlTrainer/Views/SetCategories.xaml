@@ -26,8 +26,8 @@
     <ResourceDictionary>
         <DataTemplate x:Key="dataMarkerTemplate">
             <StackLayout Padding="3" Orientation="Horizontal" BackgroundColor="{Binding Source={x:Reference dataLabel}, Path=Text.Length, ConverterParameter={x:Reference dataLabel}, Converter={StaticResource NameToColour}}">
-                <Label x:Name="dataLabel" Text="{Binding Name}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start" FontSize = "13"/>
-                <Label Text="{Binding Percent}" TextColor="White" HorizontalOptions="End" FontSize="13" VerticalOptions="Center"/>
+                <Label x:Name="dataLabel" Text="{Binding Name}" TextColor="White" HorizontalOptions="Start" FontSize = "13"/>
+                <Label Text="{Binding Percent}" TextColor="White" HorizontalOptions="End" FontSize="13"/>
             </StackLayout>
         </DataTemplate>    
     </ResourceDictionary>
@@ -35,17 +35,18 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-    <ToolbarItem Clicked="Button_Clicked" Text="Clear" Priority="0" />
+        <ToolbarItem Clicked="Save_Clicked" Text="Save" Priority="0" />
+        <ToolbarItem Clicked="Button_Clicked" Text="Clear" Priority="1" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-            <Grid BackgroundColor="White">
+            <Grid BackgroundColor="AntiqueWhite">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="1" Orientation="Vertical">
-                    <syncfusion:SfListView ItemSpacing="0" x:Name="CategoriesList" ItemsSource="{Binding CategoryData}" SelectionMode="None">
+                    <syncfusion:SfListView ItemSpacing="0" x:Name="CategoriesList" ItemsSource="{Binding PresetsData}" SelectionMode="None">
                         <syncfusion:SfListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid BackgroundColor="{Binding Source={x:Reference label}, Path=Text.Length, ConverterParameter={x:Reference label}, Converter={StaticResource NameToColour}}">
@@ -56,7 +57,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Label x:Name="label" Grid.Row="0" Grid.Column="0" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                    <Label x:Name="label" Grid.Row="0" Grid.Column="0" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
                                     <StackLayout WidthRequest="100" Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
                                          <syncfusion1:SfNumericTextBox x:Name="numBox" Minimum="0" BorderColor="White" Visual="Material" TextColor="White" Value="{Binding Percent}"/>
                                     </StackLayout>
@@ -70,9 +71,10 @@
                         <Label Text=" / 100" TextColor="Black" FontSize="Small" HorizontalOptions="End"></Label>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Grid.Row="0" VerticalOptions="Center">
-                    <chart:SfChart AreaBackgroundColor="Transparent" VerticalOptions="Center" HeightRequest="300">
-                        <chart:DoughnutSeries EnableAnimation="True" ListenPropertyChange="True" DoughnutCoefficient="0.6" CircularCoefficient="0.5" ItemsSource ="{Binding CategoryData}" XBindingPath="Name" YBindingPath="Percent" ConnectorLineType="Bezier" EnableSmartLabels="True" DataMarkerPosition="OutsideExtended"> 
+                <StackLayout Grid.Row="0">
+                    <inputLayout:SfTextInputLayout BackgroundColor="AntiqueWhite"><Entry TextColor="Black" Text="{Binding PreferenceName}"></Entry></inputLayout:SfTextInputLayout>
+                    <chart:SfChart AreaBackgroundColor="AntiqueWhite" BackgroundColor="AntiqueWhite" HeightRequest="300">
+                        <chart:DoughnutSeries EnableAnimation="True" ListenPropertyChange="True" DoughnutCoefficient="0.6" CircularCoefficient="0.5" ItemsSource ="{Binding PresetsData}" XBindingPath="Name" YBindingPath="Percent" ConnectorLineType="Bezier" EnableSmartLabels="True" DataMarkerPosition="OutsideExtended"> 
                             <chart:DoughnutSeries.ColorModel>
                                 <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
                             </chart:DoughnutSeries.ColorModel>

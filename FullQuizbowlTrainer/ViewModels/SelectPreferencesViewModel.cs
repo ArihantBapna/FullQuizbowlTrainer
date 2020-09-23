@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FullQuizbowlTrainer.Models;
+using FullQuizbowlTrainer.Views;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FullQuizbowlTrainer.ViewModels
 {
@@ -65,10 +67,18 @@ namespace FullQuizbowlTrainer.ViewModels
             }
         }
 
+        private void Subscribe()
+        {
+            MessagingCenter.Subscribe<SetCategoriesViewModel>(this,"UpdatePresets", (sender) => {
+                SetKeyValues();
+            });
+        }
+
         public SelectPreferencesViewModel(List<Categories> categoryData)
         {
             categoryDat = new ObservableCollection<Categories>(categoryData);
             SetKeyValues();
+            Subscribe();
             
         }
 
@@ -78,6 +88,7 @@ namespace FullQuizbowlTrainer.ViewModels
             string keyVal = Preferences.Get("pref_keys", default_key);
             HasSelectedItem = false;
             GetPreferences(keyVal);
+           
         }
 
         private void SetChartValues()
@@ -143,6 +154,11 @@ namespace FullQuizbowlTrainer.ViewModels
                 prefs_ids.Add(pref_id);
             }
             SavedPreferences = new ObservableCollection<PreferenceId>(prefs_ids);
+        }
+
+        public async static void PushCategoriesModal(SelectPreferencesViewModel vm, INavigation navigation, int action)
+        {
+            await navigation.PushModalAsync(new NavigationPage(new SetCategories(vm.SelectedPreference,new List<Categories>(vm.CategoryData),navigation,action)));
         }
 
 

@@ -48,7 +48,6 @@ namespace FullQuizbowlTrainer.Models
             {
                 percent = value;
                 OnPropertyChanged("Percent");
-                MessagingCenter.Send(this, "UpdateTotal");
             }
         }
 

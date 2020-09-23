@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:converter="clr-namespace:FullQuizbowlTrainer.Services.Converters" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
+<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:local="clr-namespace:FullQuizbowlTrainer.Services.Converters" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,8 +19,10 @@
         </ResourceDictionary>
 
         <ResourceDictionary>
-            <converter:NameToColourConverter x:Key="NameToColour"></converter:NameToColourConverter>
+            <local:NameToColourConverter x:Key="NameToColour"></local:NameToColourConverter>
         </ResourceDictionary>
+
+        
 
         <ResourceDictionary>
             <DataTemplate x:Key="dataMarkerTemplate">
@@ -67,7 +69,7 @@
                 </chart:SfChart>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Add New"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="AddButton_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="BurlyWood" Text="Add New"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
                         <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>

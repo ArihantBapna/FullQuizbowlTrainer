@@ -13,5 +13,10 @@ namespace FullQuizbowlTrainer.Views
             InitializeComponent();
             this.BindingContext = new SelectPreferencesViewModel(CategoryDat);
         }
+
+        void AddButton_Clicked(object sender, EventArgs args)
+        {
+            SelectPreferencesViewModel.PushCategoriesModal((SelectPreferencesViewModel)this.BindingContext, this.Navigation, 0);
+        }
     }
 }

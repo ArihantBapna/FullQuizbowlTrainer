@@ -26,6 +26,7 @@ namespace FullQuizbowlTrainer.Models
             {
                 percent = value;
                 OnPropertyChanged("Percent");
+                Xamarin.Forms.MessagingCenter.Send(this, "UpdateTotal");
             }
         }
 
