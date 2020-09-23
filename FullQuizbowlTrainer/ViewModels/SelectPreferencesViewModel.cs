@@ -86,6 +86,17 @@ namespace FullQuizbowlTrainer.ViewModels
                 OnPropertyChanged("NotSelectedItem");
             }
         }
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set
+            {
+                isLoading = value;
+                OnPropertyChanged("IsLoading");
+            }
+        }
         private void Subscribe()
         {
             MessagingCenter.Subscribe<SetCategoriesViewModel>(this,"UpdatePresets", (sender) => {
@@ -96,9 +107,12 @@ namespace FullQuizbowlTrainer.ViewModels
         public SelectPreferencesViewModel(List<Categories> categoryData)
         {
             categoryDat = new ObservableCollection<Categories>(categoryData);
+            
             SetKeyValues();
             Subscribe();
-            
+
+            IsLoading = false;
+
         }
 
         private void SetKeyValues()
@@ -177,7 +191,42 @@ namespace FullQuizbowlTrainer.ViewModels
 
         public async static void PushCategoriesModal(SelectPreferencesViewModel vm, INavigation navigation, int action)
         {
+            vm.IsLoading = true;
+
             await navigation.PushModalAsync(new NavigationPage(new SetCategories(vm.SelectedPreference,new List<Categories>(vm.CategoryData),navigation,action)));
+
+            vm.IsLoading = false;
+        }
+
+        public static void DeletePresetData(SelectPreferencesViewModel vm)
+        {
+            vm.IsLoading = true;
+
+            PreferenceId pref = vm.SelectedPreference;
+
+            string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
+            string keyVal = Preferences.Get("pref_keys", default_key);
+
+            string keyToDelete = "name=" + pref.Name + ",id=" + pref.Id + "," + pref.PresetData;
+            string finalKey = "";
+            foreach (string s in keyVal.Split(';'))
+            {
+                if (!s.Equals(keyToDelete))
+                {
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        if (finalKey.Equals("")) finalKey += s;
+                        else finalKey += ";" + s;
+                    }
+                }
+            }
+
+            Preferences.Set("pref_keys", finalKey);
+            vm.SetKeyValues();
+
+            vm.SavedPreferences.Remove(pref);
+
+            vm.IsLoading = false;
         }
 
 

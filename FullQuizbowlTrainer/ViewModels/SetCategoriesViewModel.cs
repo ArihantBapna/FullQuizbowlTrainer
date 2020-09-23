@@ -68,7 +68,8 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 Presets c2 = new Presets();
                 c2.Name = c.Name;
-                c2.Percent = 0;
+                if(c.Equals(vm.PresetsData[0])) c2.Percent = 100;
+                else { c2.Percent = 0; }
                 vcm.Add(c2);
             }
             vm.PresetsData = vcm;

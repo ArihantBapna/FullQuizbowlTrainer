@@ -22,5 +22,9 @@ namespace FullQuizbowlTrainer.Views
         {
             SelectPreferencesViewModel.PushCategoriesModal((SelectPreferencesViewModel)this.BindingContext, this.Navigation, 1);
         }
+        void DeleteButton_Clicked(object sender, EventArgs args)
+        {
+            SelectPreferencesViewModel.DeletePresetData((SelectPreferencesViewModel)this.BindingContext);
+        }
     }
 }
