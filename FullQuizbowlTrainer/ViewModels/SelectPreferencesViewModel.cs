@@ -52,8 +52,16 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 selectedPreference = value;
                 OnPropertyChanged("SelectedPreference");
-                HasSelectedItem = true;
-                SetChartValues();
+                if(SelectedPreference != null)
+                {
+                    HasSelectedItem = true;
+                    SetChartValues();
+                }
+                else
+                {
+                    HasSelectedItem = false;
+                    PresetData = new ObservableCollection<Presets>();
+                }
             }
         }
         private bool hasSelectedItem;
@@ -64,9 +72,20 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 hasSelectedItem = value;
                 OnPropertyChanged("HasSelectedItem");
+                NotSelectedItem = !HasSelectedItem;
             }
         }
 
+        private bool notSelectedItem;
+        public bool NotSelectedItem
+        {
+            get { return notSelectedItem; }
+            set
+            {
+                notSelectedItem = value;
+                OnPropertyChanged("NotSelectedItem");
+            }
+        }
         private void Subscribe()
         {
             MessagingCenter.Subscribe<SetCategoriesViewModel>(this,"UpdatePresets", (sender) => {

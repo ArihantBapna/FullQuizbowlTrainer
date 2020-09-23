@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:local="clr-namespace:FullQuizbowlTrainer.Services.Converters" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
+<ContentPage Title="Select Preferences" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:converter="clr-namespace:FullQuizbowlTrainer.Services.Converters" x:Class="FullQuizbowlTrainer.Views.SelectPreferences">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,11 +19,7 @@
         </ResourceDictionary>
 
         <ResourceDictionary>
-            <local:NameToColourConverter x:Key="NameToColour"></local:NameToColourConverter>
-        </ResourceDictionary>
-
-        <ResourceDictionary>
-            <local:TurnBoolToOpposite x:Key="InverseBool"></local:TurnBoolToOpposite>
+            <converter:NameToColourConverter x:Key="NameToColour"></converter:NameToColourConverter>
         </ResourceDictionary>
 
         <ResourceDictionary>
@@ -42,7 +38,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <syncfusion:SfListView Grid.Row="0" x:Name="Preferences" VerticalOptions="Start" ItemSpacing="10" SelectionMode="Single" SelectedItem="{Binding SelectedPreference}" ItemsSource="{Binding SavedPreferences}">
+            <syncfusion:SfListView Grid.Row="0" x:Name="Preferences" VerticalOptions="Start" ItemSpacing="10" SelectionMode="SingleDeselect" SelectedItem="{Binding SelectedPreference}" ItemsSource="{Binding SavedPreferences}">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10" BackgroundColor="Crimson">
@@ -71,7 +67,7 @@
                 </chart:SfChart>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <buttons:SfButton CornerRadius="3" Clicked="AddButton_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="BurlyWood" Text="Add New"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="AddButton_Clicked" IsEnabled="{Binding NotSelectedItem}" BackgroundColor="BurlyWood" Text="Add New"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
                         <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
