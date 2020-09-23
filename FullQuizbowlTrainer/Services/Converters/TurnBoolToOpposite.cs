@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace FullQuizbowlTrainer.Services.Converters
 {
-    public class InverseBoolConverter : IValueConverter
+    public class TurnBoolToOpposite : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

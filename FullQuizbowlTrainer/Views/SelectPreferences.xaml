@@ -22,7 +22,9 @@
             <local:NameToColourConverter x:Key="NameToColour"></local:NameToColourConverter>
         </ResourceDictionary>
 
-        
+        <ResourceDictionary>
+            <local:TurnBoolToOpposite x:Key="InverseBool"></local:TurnBoolToOpposite>
+        </ResourceDictionary>
 
         <ResourceDictionary>
             <DataTemplate x:Key="dataMarkerTemplate">
