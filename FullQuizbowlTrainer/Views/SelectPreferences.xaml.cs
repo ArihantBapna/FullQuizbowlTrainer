@@ -18,5 +18,9 @@ namespace FullQuizbowlTrainer.Views
         {
             SelectPreferencesViewModel.PushCategoriesModal((SelectPreferencesViewModel)this.BindingContext, this.Navigation, 0);
         }
+        void EditButton_Clicked(object sender, EventArgs args)
+        {
+            SelectPreferencesViewModel.PushCategoriesModal((SelectPreferencesViewModel)this.BindingContext, this.Navigation, 1);
+        }
     }
 }

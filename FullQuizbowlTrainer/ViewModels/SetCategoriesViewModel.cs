@@ -38,6 +38,8 @@ namespace FullQuizbowlTrainer.ViewModels
             }
         }
 
+        private string OldKey { get; set; }
+
         public void Subscribe()
         {
             MessagingCenter.Subscribe<Presets>(this, "UpdateTotal", (sender) => {
@@ -103,6 +105,8 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 Preference = pref;
                 PreferenceName = Preference.Name;
+                string oldKey = "name=" + Preference.Name + ",id=" + Preference.Id + "," + Preference.PresetData;
+                OldKey = oldKey;
             }
 
             CategoryData = categData;
@@ -144,29 +148,73 @@ namespace FullQuizbowlTrainer.ViewModels
         public static async void SaveNewPreference(SetCategoriesViewModel vm, INavigation Nav)
         {
 
-            string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
-            string keyVal = Preferences.Get("pref_keys", default_key);
-
-            string newKey = "name=" + vm.PreferenceName + ",id=" + vm.Preference.Id +",";
-
-            Presets lastP = vm.PresetsData[vm.PresetsData.Count-1];
-            foreach(Presets p in vm.PresetsData)
+            if (vm.PreferenceName.Contains(","))
             {
-                if (p != lastP)
+                await Application.Current.MainPage.DisplayAlert("Error with name", "Please don't use punctuation marks in a preference name.", "Okay");
+            }
+            else
+            {
+                string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
+                string keyVal = Preferences.Get("pref_keys", default_key);
+
+                string newKey = "name=" + vm.PreferenceName + ",id=" + vm.Preference.Id + ",";
+
+                Presets lastP = vm.PresetsData[vm.PresetsData.Count - 1];
+                foreach (Presets p in vm.PresetsData)
                 {
-                    newKey += p.Percent + ",";
+                    if (p != lastP)
+                    {
+                        newKey += p.Percent + ",";
+                    }
+                    else
+                    {
+                        newKey += p.Percent;
+                    }
                 }
-                else
+
+                vm.Preference.PresetData = newKey;
+                keyVal = keyVal + ";" + newKey;
+                Preferences.Set("pref_keys", keyVal);
+                MessagingCenter.Send(vm, "UpdatePresets");
+                await Nav.PopModalAsync();
+            }
+        }
+
+        public static async void SaveEditPreference(SetCategoriesViewModel vm, INavigation Nav)
+        {
+            if (vm.PreferenceName.Contains(","))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error with name", "Please don't use punctuation marks in a preference name.", "Okay");
+            }
+            else
+            {
+                string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
+                string keyVal = Preferences.Get("pref_keys", default_key);
+
+                string newKey = "name=" + vm.PreferenceName + ",id=" + vm.Preference.Id + ",";
+
+                Presets lastP = vm.PresetsData[vm.PresetsData.Count - 1];
+                foreach (Presets p in vm.PresetsData)
                 {
-                    newKey += p.Percent;
+                    if (p != lastP)
+                    {
+                        newKey += p.Percent + ",";
+                    }
+                    else
+                    {
+                        newKey += p.Percent;
+                    }
                 }
+
+                string finalKeyVal = keyVal.Replace(vm.OldKey, newKey);
+
+                Preferences.Set("pref_keys", finalKeyVal);
+                MessagingCenter.Send(vm, "UpdatePresets");
+                await Nav.PopModalAsync();
             }
 
-            vm.Preference.PresetData = newKey;
-            keyVal = keyVal + ";" + newKey;
-            Preferences.Set("pref_keys", keyVal);
-            MessagingCenter.Send(vm, "UpdatePresets");
-            await Nav.PopModalAsync();
+
+
         }
 
         

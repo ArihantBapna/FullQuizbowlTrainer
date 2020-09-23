@@ -70,7 +70,7 @@
                         <buttons:SfButton CornerRadius="3" Clicked="AddButton_Clicked" IsEnabled="{Binding NotSelectedItem}" BackgroundColor="BurlyWood" Text="Add New"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
-                        <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="End">
                         <buttons:SfButton CornerRadius="3" BackgroundColor="BurlyWood" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
