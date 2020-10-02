@@ -26,5 +26,10 @@ namespace FullQuizbowlTrainer.Views
         {
             SelectPreferencesViewModel.DeletePresetData((SelectPreferencesViewModel)this.BindingContext);
         }
+
+        async void Start_Clicked(object sender, EventArgs args)
+        {
+            SelectPreferencesViewModel.StartQuizzing((SelectPreferencesViewModel)this.BindingContext, this.Navigation, this);
+        }
     }
 }

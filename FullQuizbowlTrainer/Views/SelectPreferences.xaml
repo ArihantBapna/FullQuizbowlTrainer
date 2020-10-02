@@ -32,6 +32,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add New" Priority="0" Clicked="AddButton_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid BackgroundColor="AntiqueWhite">
             <Grid.RowDefinitions>
@@ -67,7 +71,7 @@
                 </chart:SfChart>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <buttons:SfButton CornerRadius="3" Clicked="AddButton_Clicked" IsEnabled="{Binding NotSelectedItem}" BackgroundColor="BurlyWood" Text="Add New"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="Start_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="BurlyWood" Text="Start"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
                         <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>

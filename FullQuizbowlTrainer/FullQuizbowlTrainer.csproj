@@ -29,6 +29,8 @@
     <Folder Include="Services\" />
     <Folder Include="Services\Database\" />
     <Folder Include="Services\Converters\" />
+    <Folder Include="Services\Selector\" />
+    <Folder Include="Services\Reading\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Models\Categories.cs">

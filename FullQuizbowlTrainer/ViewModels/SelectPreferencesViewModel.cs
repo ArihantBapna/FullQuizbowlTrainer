@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FullQuizbowlTrainer.Models;
+using FullQuizbowlTrainer.Services.Database;
 using FullQuizbowlTrainer.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -229,6 +230,25 @@ namespace FullQuizbowlTrainer.ViewModels
             vm.IsLoading = false;
         }
 
+        public async static void StartQuizzing(SelectPreferencesViewModel vm, INavigation nav, SelectPreferences preferencesPage)
+        {
+            vm.IsLoading = true;
+
+            for(int i = 0; i < vm.PresetData.Count; i++)
+            {
+                vm.CategoryData[i].Percent = vm.PresetData[i].Percent;
+            }
+            ObservableCollection<Categories> catData = vm.CategoryData;
+
+            UserProfile userProfile = new UserProfile();
+            userProfile.Categories = catData;
+
+            DatabaseManager dbM = new DatabaseManager();
+            userProfile.Answers = new ObservableCollection<Answers>(await dbM.GetAnswers());
+            nav.InsertPageBefore(new QuizzingPage(userProfile), preferencesPage);
+            await nav.PopAsync();
+            
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

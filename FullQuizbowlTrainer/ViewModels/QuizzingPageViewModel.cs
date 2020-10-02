@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using FullQuizbowlTrainer.Models;
 using FullQuizbowlTrainer.Services.Database;
+using FullQuizbowlTrainer.Services.Reading;
+using FullQuizbowlTrainer.Services.Selector;
+using Xamarin.Forms;
 
 namespace FullQuizbowlTrainer.ViewModels
 {
@@ -11,40 +15,91 @@ namespace FullQuizbowlTrainer.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Answers> listAnswers = new ObservableCollection<Answers>();
-        public ObservableCollection<Answers> ListAnswers
+        private Questions question;
+        public Questions Question
         {
-            get { return listAnswers; }
+            get { return question; }
             set
             {
-                listAnswers = value;
-                OnPropertyChanged("ListAnswers");
+                question = value;
+                OnPropertyChanged("Question");
             }
         }
 
-        private ObservableCollection<Questions> listQuestions = new ObservableCollection<Questions>();
-        public ObservableCollection<Questions> ListQuestions
+        private Answers answer;
+        public Answers Answer
         {
-            get { return listQuestions; }
+            get { return answer; }
             set
             {
-                listQuestions = value;
-                OnPropertyChanged("ListQuestions");
+                answer = value;
+                OnPropertyChanged("Answer");
             }
         }
 
-        public QuizzingPageViewModel(List<Answers> ans)
+        private string questionText;
+        public string QuestionText
         {
-            ListAnswers = new ObservableCollection<Answers>(ans);
-            SetQuestionsList();
+            get { return questionText; }
+            set
+            {
+                questionText = value;
+                OnPropertyChanged("QuestionText");
+            }
+        }
+
+        private string buttonState;
+        public string ButtonState
+        {
+            get { return buttonState; }
+            set
+            {
+                buttonState = value;
+                OnPropertyChanged("ButtonState");
+            }
+        }
+
+        private bool isReading;
+        public bool IsReading
+        {
+            get { return isReading; }
+            set
+            {
+                isReading = value;
+                OnPropertyChanged("IsReading");
+                if (IsReading) ButtonState = "Buzz";
+                else
+                {
+                    if (!isStarted) ButtonState = "Withdraw";
+                }
+            }
+        }
+
+        public ReadQuestions Reader { get; set; }
+
+        public bool isStarted { get; set; }
+        
+
+        public QuizzingPageViewModel(UserProfile userProfile)
+        {
+            NewAnswerLine answerLine = new NewAnswerLine(userProfile);
+            Answer = answerLine.SelectedAnswer;
+            Task.Run(() => answerLine.GetNewQuestion(Answer)).Wait();
+            Question = answerLine.SelectedQuestion;
+            QuestionText = "This is where the question will start reading";
+
+            isStarted = true;
+            ButtonState = "Start Reading";
+
+            Reader = new ReadQuestions(Question);
             
         }
 
-        async void SetQuestionsList()
+        public void Read()
         {
-            DatabaseManager db = new DatabaseManager();
-            ListQuestions = new ObservableCollection<Questions>(await db.GetQuestionsFromAnswerId(ListAnswers[0].ID));
+            Reader.ReadAQuestion(this);
         }
+
 
         public virtual void OnPropertyChanged(string propertyName)
         {
