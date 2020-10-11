@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using FullQuizbowlTrainer.ViewModels;
+using SQLite;
 using Xamarin.Forms;
 
 namespace FullQuizbowlTrainer.Models
@@ -9,11 +10,11 @@ namespace FullQuizbowlTrainer.Models
     {
         private int id;
         private string name;
-        private int user;
+        private double user;
         private double percent;
         private double max;
 
-
+        [PrimaryKey, AutoIncrement, Column("Id")]
         public int Id
         {
             get { return id; }
@@ -32,7 +33,7 @@ namespace FullQuizbowlTrainer.Models
                 OnPropertyChanged("Name");
             }
         }
-        public int User
+        public double User
         {
             get { return user; }
             set

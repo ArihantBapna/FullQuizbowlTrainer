@@ -59,17 +59,17 @@ namespace FullQuizbowlTrainer.Services.Selector
             }
             
             SubList.Sort((x, y) => x.Score.CompareTo(y.Score));
-            return SubList.Last();
+            Random r = new Random();
+            int newR = r.Next(SubList.Count - 10, SubList.Count - 1);
+            return SubList[newR];
         }
 
         public async Task<Questions> GetNewQuestion(Answers SelectedAnswer)
         {
-            Console.WriteLine("Started reading questions: ");
             DatabaseManager dbM = new DatabaseManager();
             List<Questions> availQuestions = await dbM.GetQuestionsFromAnswerId(SelectedAnswer.ID);
             availQuestions.Sort((x, y) => x.Answered.CompareTo(y.Answered));
             SelectedQuestion = availQuestions.Last();
-            Console.WriteLine("Question found \n" + SelectedQuestion.Question);
             return SelectedQuestion;
         }
     }

@@ -57,7 +57,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Label x:Name="label" Grid.Row="0" Grid.Column="0" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                    <Label x:Name="label" Grid.Row="0" Grid.Column="0" TextColor="White" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Name}" Padding="10"/>
                                     <StackLayout WidthRequest="100" Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
                                          <syncfusion1:SfNumericTextBox x:Name="numBox" Minimum="0" BorderColor="White" Visual="Material" TextColor="White" Value="{Binding Percent}"/>
                                     </StackLayout>
@@ -66,7 +66,7 @@
                         </syncfusion:SfListView.ItemTemplate>
                     </syncfusion:SfListView>
                     <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Percent Points available to allocation" TextColor="Black" FontSize="Small" HorizontalOptions="Start"></Label>
+                        <Label Text="Percentage available to allocate" TextColor="Black" FontSize="Small" HorizontalOptions="Start"></Label>
                         <Label Text="{Binding TotalAvailable}" TextColor="Black" FontSize="Small" HorizontalOptions="Center"></Label>
                         <Label Text=" / 100" TextColor="Black" FontSize="Small" HorizontalOptions="End"></Label>
                     </StackLayout>

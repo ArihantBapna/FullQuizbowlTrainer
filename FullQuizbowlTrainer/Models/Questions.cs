@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using SQLite;
 
 namespace FullQuizbowlTrainer.Models
 {
@@ -75,6 +76,7 @@ namespace FullQuizbowlTrainer.Models
         }
 
         private int iD;
+        [PrimaryKey, AutoIncrement, Column("ID")]
         public int ID
         {
             get { return iD; }

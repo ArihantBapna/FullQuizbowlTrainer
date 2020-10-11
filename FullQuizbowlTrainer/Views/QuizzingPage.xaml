@@ -4,10 +4,9 @@
         <Grid RowSpacing="10" BackgroundColor="AntiqueWhite">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0" BackgroundColor="SandyBrown" Orientation="Horizontal">
@@ -17,22 +16,53 @@
                 <Label TextColor="White" Text="{Binding Question.Difficulty, StringFormat='{0} '}" VerticalTextAlignment="Center"></Label>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" BackgroundColor="SandyBrown" Margin="30,10">
-                <Label TextColor="White" Text="{Binding QuestionText}" FontSize="15" Padding="10"></Label>
-            </StackLayout>
+            <ScrollView Grid.Row="1" Orientation="Vertical">
+                <StackLayout BackgroundColor="SandyBrown" Margin="30,0">
+                    <Label TextColor="White" Text="{Binding QuestionText}" FontSize="19" Padding="10"></Label>
+                </StackLayout>
+            </ScrollView>
 
-            <StackLayout VerticalOptions="End" Grid.Row="2" Margin="100,0" > 
-                <buttons:SfButton Text="{Binding ButtonState}" Clicked="Buzz_Clicked" BackgroundColor="SaddleBrown"></buttons:SfButton>
-            </StackLayout>
+            <ScrollView Grid.Row="2" Grid.RowSpan="2">     
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"  Orientation="Horizontal" HeightRequest="100" HorizontalOptions="Center" Margin="0,0">
+                    <Grid Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="60"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-            <StackLayout VerticalOptions="Center" Grid.Row="3" Margin="20,0">
-                <inputLayout:SfTextInputLayout IsEnabled="False" FocusedColor="SaddleBrown" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry"/></inputLayout:SfTextInputLayout>
-            </StackLayout>
+                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="SaddleBrown"></buttons:SfButton>
+                    <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="SaddleBrown"></buttons:SfButton>
+                    <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="SaddleBrown"></buttons:SfButton>
 
-            <StackLayout Grid.Row="4" Orientation="Horizontal" VerticalOptions="Start" HeightRequest="40" HorizontalOptions="Fill" Margin="30,0">
-                <buttons:SfButton Text="Report" BackgroundColor="SaddleBrown" HorizontalOptions="StartAndExpand" WidthRequest="70"></buttons:SfButton>
-                <buttons:SfButton Text="Next" BackgroundColor="SaddleBrown" HorizontalOptions="End" WidthRequest="70"></buttons:SfButton>
-            </StackLayout>
+                    <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="SaddleBrown" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="SaddleBrown" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Grid.Row="1" BackgroundColor="SandyBrown" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="White" Text="Answer:"></Label>
+                        <Label TextColor="White" Text="{Binding FinalAnswer}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="White" Text="Alternates:"></Label>
+                        <Label TextColor="White" Text="{Binding Alternate}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="White" Text="Prompt:"></Label>
+                        <Label TextColor="White" Text="{Binding Prompts}"></Label>
+                    </StackLayout>
+                </StackLayout>
+                </Grid> 
+            </ScrollView>
 
         </Grid>
     </ContentPage.Content>

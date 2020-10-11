@@ -31,5 +31,20 @@ namespace FullQuizbowlTrainer.Services.Database
             return await dbConnection.QueryAsync<Categories>("Select * From [Categories]");
         }
 
+        public async Task<int> UpdateAnswer(Answers answer)
+        {
+            return await dbConnection.ExecuteAsync("Update Answers SET Rating = ?, Score = ?, Corrects = ?, Negs = ? Where ID = ?", answer.Rating, answer.Score, answer.Corrects, answer.Negs, answer.ID);
+        }
+
+        public async Task<int> UpdateUserCategory(Categories categery)
+        {
+            return await dbConnection.ExecuteAsync("UPDATE Categories SET User = ? Where Id = ?", categery.User, categery.Id);
+        }
+
+        public async Task<int> UpdateQuestion(Questions questions)
+        {
+            return await dbConnection.ExecuteAsync("UPDATE Questions SET Answered = ? Where ID = ?", questions.Answered, questions.ID);
+        }
+
     }
 }

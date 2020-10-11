@@ -33,11 +33,25 @@ namespace FullQuizbowlTrainer.Views
                 }
                 else
                 {
-                    qVm.IsReading = true;
-                    AnswerEntry.Unfocus();
-                    qVm.Read();
+                    if (!string.IsNullOrWhiteSpace(qVm.AnsweredText))
+                    {
+                        if (qVm.CheckAnswer()) qVm.AnsweredText = "Correct";
+                        else qVm.AnsweredText = "Incorrect";
+                    }
+                    else
+                    {
+                        qVm.IsReading = true;
+                        AnswerEntry.Unfocus();
+                        qVm.Read();
+                    }
                 }
             }
+        }
+
+        void Next_Clicked(System.Object sender, System.EventArgs e)
+        {
+            QuizzingPageViewModel qVm = (QuizzingPageViewModel)this.BindingContext;
+            qVm.NextQuestion();
         }
     }
 }
