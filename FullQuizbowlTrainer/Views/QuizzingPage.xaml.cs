@@ -35,8 +35,7 @@ namespace FullQuizbowlTrainer.Views
                 {
                     if (!string.IsNullOrWhiteSpace(qVm.AnsweredText))
                     {
-                        if (qVm.CheckAnswer()) qVm.AnsweredText = "Correct";
-                        else qVm.AnsweredText = "Incorrect";
+                        qVm.CheckAnswer();
                     }
                     else
                     {

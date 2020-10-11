@@ -40,9 +40,9 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="SaddleBrown"></buttons:SfButton>
+                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="SaddleBrown" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
                     <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="SaddleBrown"></buttons:SfButton>
-                    <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="SaddleBrown"></buttons:SfButton>
+                    <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="SaddleBrown" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
 
                     <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="SaddleBrown" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="SaddleBrown" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
                     </Grid>

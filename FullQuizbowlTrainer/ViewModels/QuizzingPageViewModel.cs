@@ -141,6 +141,8 @@ namespace FullQuizbowlTrainer.ViewModels
             }
         }
 
+        public double k { get; set; }
+
         public ReadQuestions Reader { get; set; }
 
         public bool isStarted { get; set; }
@@ -152,15 +154,17 @@ namespace FullQuizbowlTrainer.ViewModels
             UserProfile = userProfile;
             NextQuestion();
             QuestionText = "This is where the question will start reading";
+            ButtonState = "Start Reading";
             
         }
 
         public void Read()
         {
+            QuestionText = "";
             Reader.ReadAQuestion(this);
         }
 
-        public bool CheckAnswer()
+        public void CheckAnswer()
         {
             var l = new NormalizedLevenshtein();
             QuestionText = Question.Question;
@@ -168,49 +172,24 @@ namespace FullQuizbowlTrainer.ViewModels
             Alternate = Question.Alternate;
             Prompts = Question.Prompt;
             IsCompleted = true;
-            Question.Answered++;
+            Question.Answered += 1;
+
+
             if (l.Distance(AnsweredText,Question.Answer) <= 0.8)
             {
-                UpdateScoreAndRating(true);
-                return true;
+                UpdateBuzzCorrect();
             }
             else
             {
-                UpdateScoreAndRating(false);
-                return false;
+                UpdateBuzzIncorrect();
             }
         }
 
-        public async void UpdateScoreAndRating(bool corr)
+        public async Task UpdateScoreAndRating()
         {
-            
-            int actual = corr ? 1 : 0;
             var ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
             var cat = UserProfile.Categories.FirstOrDefault(x => x.Id == Answer.Category);
-            double k = (0.8 - (Reader.sentenceAt / Reader.sentences.Length)) * 30;
-            Console.WriteLine("k value is : " + k);
-            double prob = ProbabilityofCorr(ans.Rating, cat.User);
-            cat.User += k * (actual - prob);
-            ans.Rating += k * ((1 - actual) - (1 - prob));
-            Console.WriteLine("Actual: " + actual);
 
-            if (corr)
-            {
-                ans.Corrects++;
-                
-            }
-            else
-            {
-                ans.Negs++;
-            }
-            int d = ans.Difficulty * 10;
-            Console.WriteLine("Initial score: " + ans.Score);
-            ans.Score -= d*((ans.Corrects - ans.Negs) * Math.Log10(Math.Pow(d,2) + 1));
-            Console.WriteLine("Final Score: " + ans.Score);
-            Console.WriteLine("New user category score: " + cat.User);
-            Console.WriteLine("New answerline rating: " + ans.Rating);
-            Console.WriteLine("New answerline score: " + ans.Score);
-            Console.WriteLine("Trying to update database");
             DatabaseManager dbM = new DatabaseManager();
             await dbM.UpdateAnswer(ans);
             await dbM.UpdateQuestion(Question);
@@ -218,14 +197,48 @@ namespace FullQuizbowlTrainer.ViewModels
 
         }
 
+        public async void UpdateBuzzCorrect()
+        {
+            var ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
+            var cat = UserProfile.Categories.FirstOrDefault(x => x.Id == Answer.Category);
+            double prob = ProbabilityofCorr(ans.Rating, cat.User);
+
+            cat.User += k * (1 - prob);
+            ans.Rating += k * (0 - (1 - prob));
+
+            ans.Corrects += 1;
+
+            double d = (ans.Difficulty * 10);
+            ans.Score -= d * ((ans.Corrects - ans.Negs) * Math.Log10(Math.Pow(d,2) + 1));
+
+            AnsweredText = "Correct";
+
+            await UpdateScoreAndRating();
+        }
+
+        public async void UpdateBuzzIncorrect()
+        {
+            var ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
+            var cat = UserProfile.Categories.FirstOrDefault(x => x.Id == Answer.Category);
+            double prob = ProbabilityofCorr(ans.Rating, cat.User);
+
+            cat.User += k * (0 - prob);
+            ans.Rating += k * (1 - (1 - prob));
+
+            ans.Negs += 1;
+
+            double d = (ans.Difficulty * 10);
+            ans.Score -= d * ((ans.Corrects - ans.Negs) * Math.Log10(Math.Pow(d, 2) + 1));
+
+            AnsweredText = "Incorrect";
+
+            await UpdateScoreAndRating();
+        }
+
         public double ProbabilityofCorr(double answerRating, double userRating)
         {
             double probability;
-            Console.WriteLine("Answer rating: " + answerRating);
-            Console.WriteLine("User rating: " + userRating);
             probability = 1 / (1 + Math.Pow(10, (answerRating - userRating)/400));
-            Console.WriteLine("probability: " + probability);
-
             return probability;
         }
 

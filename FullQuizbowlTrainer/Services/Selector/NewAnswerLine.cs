@@ -69,7 +69,7 @@ namespace FullQuizbowlTrainer.Services.Selector
             DatabaseManager dbM = new DatabaseManager();
             List<Questions> availQuestions = await dbM.GetQuestionsFromAnswerId(SelectedAnswer.ID);
             availQuestions.Sort((x, y) => x.Answered.CompareTo(y.Answered));
-            SelectedQuestion = availQuestions.Last();
+            SelectedQuestion = availQuestions.First();
             return SelectedQuestion;
         }
     }

@@ -24,9 +24,7 @@ namespace FullQuizbowlTrainer.Services.Reading
 
         public async void ReadAQuestion(QuizzingPageViewModel qVm)
         {
-            Console.WriteLine(sentences[sentenceAt]);
             WordsOfQuestions = sentences[sentenceAt].Split(' ');
-            Console.WriteLine(WordsOfQuestions.Length);
             
             for(int i = positionAt; i < WordsOfQuestions.Length; i++)
             {
@@ -46,13 +44,24 @@ namespace FullQuizbowlTrainer.Services.Reading
                 {
                     sentenceAt += 1;
                     positionAt = 0;
-                    await Task.Delay(800);
+
+                    if (sentenceAt / sentences.Length <= 0.3) qVm.k = 50;
+                    else if (sentenceAt / sentences.Length <= 0.6) qVm.k = 30;
+                    else qVm.k = 15;
+
+                    await Task.Delay(1000);
                     qVm.QuestionText = "";
                     ReadAQuestion(qVm);
                 }
                 else
                 {
-                    qVm.IsReading = false;
+                    await Task.Delay(5000);
+                    if (!qVm.IsCompleted)
+                    {
+                        qVm.IsCompleted = true;
+                        qVm.NextQuestion();
+                    }
+                    
                 }
             }
 
