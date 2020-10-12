@@ -46,9 +46,11 @@ namespace FullQuizbowlTrainer.Views
             Console.WriteLine("Time took: " + timeSpan.Seconds +"s " +timeSpan.Milliseconds +"ms ");
         }
 
-        void Button_Clicked_1(System.Object sender, System.EventArgs e)
+        async void Button_Clicked_1(System.Object sender, System.EventArgs e)
         {
-
+            DatabaseManager dbM = new DatabaseManager();
+            List<Answered> answerList = await dbM.GetAllAnswereds();
+            await Navigation.PushAsync(new StatsPage(answerList));
         }
     }
 

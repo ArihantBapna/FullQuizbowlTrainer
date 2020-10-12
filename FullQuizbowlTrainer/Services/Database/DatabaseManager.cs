@@ -53,7 +53,7 @@ namespace FullQuizbowlTrainer.Services.Database
 
         public async Task<int> InsertAnsweredRead(Answered answered)
         {
-            return await dbConnection.ExecuteAsync("INSERT INTO Answered (AnswerId, Answer, Category, Difficulty, Rating, Negs, Score) VALUES (?,?,?,?,?,?,?)", answered.AnswerID, answered.Category, answered.Category, answered.Difficulty, answered.Difficulty, answered.Rating, answered.Negs, answered.Score);
+            return await dbConnection.ExecuteAsync("INSERT INTO Answered (AnswerId, Answer, Category, Difficulty, Rating, Negs, Score, Correct) VALUES (?,?,?,?,?,?,?,?)", answered.AnswerID, answered.Answer, answered.Category, answered.Difficulty, answered.Rating, answered.Negs, answered.Score, answered.Correct);
         }
 
     }

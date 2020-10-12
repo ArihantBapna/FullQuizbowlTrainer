@@ -190,7 +190,8 @@ namespace FullQuizbowlTrainer.ViewModels
         public async Task UpdateAnswered()
         {
             Answered ans = new Answered();
-            ans.Answer = FinalAnswer;
+            ans.Answer = AnsweredText;
+            ans.Correct = "Some text";
             ans.AnswerID = Question.AnswerID;
             ans.QuestionID = Question.ID;
             ans.Category = Question.Category;
