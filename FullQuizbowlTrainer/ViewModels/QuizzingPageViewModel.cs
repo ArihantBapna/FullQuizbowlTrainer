@@ -148,6 +148,8 @@ namespace FullQuizbowlTrainer.ViewModels
         public bool isStarted { get; set; }
 
         public UserProfile UserProfile { get; set; }
+
+        string UserBuzzedText { get; set; }
         
         public QuizzingPageViewModel(UserProfile userProfile)
         {
@@ -166,6 +168,11 @@ namespace FullQuizbowlTrainer.ViewModels
 
         public async void CheckAnswer()
         {
+            foreach(char c in AnsweredText.ToCharArray())
+            {
+                UserBuzzedText += c.ToString();
+            }
+
             var l = new NormalizedLevenshtein();
             QuestionText = Question.Question;
             FinalAnswer = Question.Answer;
@@ -191,8 +198,8 @@ namespace FullQuizbowlTrainer.ViewModels
         public async Task UpdateAnswered()
         {
             Answered ans = new Answered();
-            ans.Answer = AnsweredText;
-            ans.Correct = "Some text";
+            ans.Answer = UserBuzzedText;
+            ans.Correct = Question.Answer;
             ans.AnswerID = Question.AnswerID;
             ans.QuestionID = Question.ID;
             ans.Category = Question.Category;
@@ -202,8 +209,6 @@ namespace FullQuizbowlTrainer.ViewModels
             ans.Negs = Ans.Negs;
             ans.Rating = Ans.Rating;
             ans.Score = Ans.Score;
-
-            Console.WriteLine(ans.ToString());
 
             DatabaseManager dbM = new DatabaseManager();
             await dbM.InsertAnsweredRead(ans);
@@ -226,7 +231,7 @@ namespace FullQuizbowlTrainer.ViewModels
             var ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
             var cat = UserProfile.Categories.FirstOrDefault(x => x.Id == Answer.Category);
             double prob = ProbabilityofCorr(ans.Rating, cat.User);
-
+            
             cat.User += k * (1 - prob);
             ans.Rating += k * (0 - (1 - prob));
 

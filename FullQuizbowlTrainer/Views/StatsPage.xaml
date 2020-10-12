@@ -1,24 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage Title="Previously Answered" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" x:Class="FullQuizbowlTrainer.Views.StatsPage">
     <ContentPage.Content>
-    <syncfusion:SfListView x:Name="listView" 
-                   ItemsSource="{Binding AnsweredList}"
-                   ItemSize="100">
+    <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding AnsweredList}" ItemSize="100" BackgroundColor="AntiqueWhite">
     <syncfusion:SfListView.ItemTemplate>
         <DataTemplate>
-        <Grid Padding="10">
+        <Grid Padding="10" BackgroundColor="BurlyWood">
             <Grid.RowDefinitions>
             <RowDefinition Height="0.4*" />
             <RowDefinition Height="0.6*" />
             </Grid.RowDefinitions>
             <StackLayout Orientation="Horizontal" Grid.Row="0">
-                <Label Text="{Binding Answer}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
-                <Label Text="{Binding Correct}" FontAttributes="Italic" TextColor="Teal" FontSize="21"/>
+                <Label Text="{Binding Correct}" FontAttributes="Bold" TextColor="Black" FontSize="21" />
+                <Label Text="{Binding Answer}" FontAttributes="Italic" TextColor="Black" FontSize="21"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="1">
-                <Label Grid.Row="1" Text="{Binding AnswerID}" TextColor="Teal" FontSize="15"/>
-                <Label Grid.Row="1" Text="{Binding Rating}" TextColor="Teal" FontSize="15"/>
-                <Label Grid.Row="1" Text="{Binding Score}" TextColor="Teal" FontSize="15"/>
+                <Label Grid.Row="1" Text="{Binding AnswerID, StringFormat='{0}: '}" TextColor="Black" FontSize="15"/>
+                <Label Grid.Row="1" Text="{Binding Rating,StringFormat='Rating: {0:} '}" TextColor="Black" FontSize="15"/>
+                <Label Grid.Row="1" Text="{Binding Score,StringFormat='Score: {0:} '}" TextColor="Black" FontSize="15"/>
             </StackLayout>
         </Grid>
         </DataTemplate>
