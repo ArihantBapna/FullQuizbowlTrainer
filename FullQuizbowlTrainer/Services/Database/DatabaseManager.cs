@@ -31,6 +31,11 @@ namespace FullQuizbowlTrainer.Services.Database
             return await dbConnection.QueryAsync<Categories>("Select * From [Categories]");
         }
 
+        public async Task<List<Answered>> GetAllAnswereds()
+        {
+            return await dbConnection.QueryAsync<Answered>("Select * From [Answered]");
+        }
+
         public async Task<int> UpdateAnswer(Answers answer)
         {
             return await dbConnection.ExecuteAsync("Update Answers SET Rating = ?, Score = ?, Corrects = ?, Negs = ? Where ID = ?", answer.Rating, answer.Score, answer.Corrects, answer.Negs, answer.ID);
@@ -44,6 +49,11 @@ namespace FullQuizbowlTrainer.Services.Database
         public async Task<int> UpdateQuestion(Questions questions)
         {
             return await dbConnection.ExecuteAsync("UPDATE Questions SET Answered = ? Where ID = ?", questions.Answered, questions.ID);
+        }
+
+        public async Task<int> InsertAnsweredRead(Answered answered)
+        {
+            return await dbConnection.ExecuteAsync("INSERT INTO Answered (AnswerId, Answer, Category, Difficulty, Rating, Negs, Score) VALUES (?,?,?,?,?,?,?)", answered.AnswerID, answered.Category, answered.Category, answered.Difficulty, answered.Difficulty, answered.Rating, answered.Negs, answered.Score);
         }
 
     }

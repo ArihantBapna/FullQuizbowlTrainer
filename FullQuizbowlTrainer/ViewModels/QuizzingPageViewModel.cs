@@ -164,7 +164,7 @@ namespace FullQuizbowlTrainer.ViewModels
             Reader.ReadAQuestion(this);
         }
 
-        public void CheckAnswer()
+        public async void CheckAnswer()
         {
             var l = new NormalizedLevenshtein();
             QuestionText = Question.Question;
@@ -183,6 +183,28 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 UpdateBuzzIncorrect();
             }
+
+            await UpdateAnswered();
+        }
+
+        public async Task UpdateAnswered()
+        {
+            Answered ans = new Answered();
+            ans.Answer = FinalAnswer;
+            ans.AnswerID = Question.AnswerID;
+            ans.QuestionID = Question.ID;
+            ans.Category = Question.Category;
+
+            var Ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
+            ans.Difficulty = Ans.Difficulty;
+            ans.Negs = Ans.Negs;
+            ans.Rating = Ans.Rating;
+            ans.Score = Ans.Score;
+
+            Console.WriteLine(ans.ToString());
+
+            DatabaseManager dbM = new DatabaseManager();
+            await dbM.InsertAnsweredRead(ans);
         }
 
         public async Task UpdateScoreAndRating()
@@ -242,8 +264,6 @@ namespace FullQuizbowlTrainer.ViewModels
             return probability;
         }
 
-
-
         public void NextQuestion()
         {
             NewAnswerLine answerLine = new NewAnswerLine(UserProfile);
@@ -255,10 +275,10 @@ namespace FullQuizbowlTrainer.ViewModels
             ButtonState = "Start Reading";
             Prompts = "";
             Alternate = "";
+            IsCompleted = false;
             FinalAnswer = "";
             Reader = new ReadQuestions(Question, this);
         }
-
 
         public virtual void OnPropertyChanged(string propertyName)
         {
