@@ -174,8 +174,9 @@ namespace FullQuizbowlTrainer.ViewModels
             IsCompleted = true;
             Question.Answered += 1;
 
+            var similarity = 1 - l.Distance(AnsweredText, Question.Answer);
 
-            if (l.Distance(AnsweredText,Question.Answer) <= 0.8)
+            if (similarity >= 0.8)
             {
                 UpdateBuzzCorrect();
             }
