@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Timers;
 using FullQuizbowlTrainer.Models;
 using FullQuizbowlTrainer.Services.Database;
+using FullQuizbowlTrainer.Services.Web;
 using FullQuizbowlTrainer.ViewModels;
 using Xamarin.Forms;
 
@@ -31,6 +33,22 @@ namespace FullQuizbowlTrainer.Views
                 CategoryDat = categoryDat;
             }
             
+        }
+
+        async void Button_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Stopwatch timer = Stopwatch.StartNew();
+            RestService restService = new RestService();
+            string wake = await restService.Get("/wake");
+            timer.Stop();
+            TimeSpan timeSpan = timer.Elapsed;
+            Console.WriteLine("Rest results:-" +wake);
+            Console.WriteLine("Time took: " + timeSpan.Seconds +"s " +timeSpan.Milliseconds +"ms ");
+        }
+
+        void Button_Clicked_1(System.Object sender, System.EventArgs e)
+        {
+
         }
     }
 

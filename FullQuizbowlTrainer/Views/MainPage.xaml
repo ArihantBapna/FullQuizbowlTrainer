@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FullQuizbowlTrainer.Views.MainPage">
+<ContentPage Title="Power 15" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FullQuizbowlTrainer.Views.MainPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello"></Label>
-            <Button Clicked="OnButtonClicked" Text="Quiz"></Button>
-        </StackLayout>
+        <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="AntiqueWhite">
+            <StackLayout BackgroundColor="AntiqueWhite" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" Margin="30,0" HorizontalOptions="Fill">
+                <Button Clicked="OnButtonClicked" Text="Quiz" TextColor="White" BackgroundColor="BurlyWood" Margin="30,0"></Button>
+                <Button Clicked="Button_Clicked" Text="Rest Test" TextColor="White" BackgroundColor="BurlyWood" Margin="10,0"></Button>
+                <Button Clicked="Button_Clicked_1" Text="Rest Test" TextColor="White" BackgroundColor="BurlyWood" Margin="20,0"></Button>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
