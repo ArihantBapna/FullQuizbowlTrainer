@@ -228,7 +228,7 @@ namespace FullQuizbowlTrainer.ViewModels
             ans.Negs += 1;
 
             double d = (ans.Difficulty * 10);
-            ans.Score -= d * ((ans.Corrects - ans.Negs) * Math.Log10(Math.Pow(d, 2) + 1));
+            ans.Score -= d * ((ans.Corrects * Math.Log10(Math.Pow(d, 2) + 1)) - ans.Negs);
 
             AnsweredText = "Incorrect";
 
