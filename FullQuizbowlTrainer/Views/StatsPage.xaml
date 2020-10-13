@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage Title="Previously Answered" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" x:Class="FullQuizbowlTrainer.Views.StatsPage">
     <ContentPage.Content>
-    <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding AnsweredList}" ItemSize="150" BackgroundColor="#D9D9D9">
+    <syncfusion:SfListView x:Name="listView" AutoFitMode="DynamicHeight" ItemsSource="{Binding AnsweredList}" BackgroundColor="#D9D9D9">
     <syncfusion:SfListView.ItemTemplate>
         <DataTemplate>
         <Grid Padding="10" BackgroundColor="#284B63">
             <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*" />
-            <RowDefinition Height="0.6*" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1"/>
             </Grid.RowDefinitions>
             <StackLayout Orientation="Horizontal" Grid.Row="0">
                 <Label Text="{Binding Correct}" FontAttributes="Bold" TextColor="White" FontFamily="Futura" FontSize="21" />
@@ -20,8 +21,9 @@
                 <Label Grid.Row="1" Text="{Binding Score,StringFormat='Score: {0:0} '}" FontFamily="Futura" TextColor="White" FontSize="15"/>
             </StackLayout>
             <StackLayout Grid.Row="2">
-                <Label Text="{Binding Clue}" TextColor="White" FontSize="3"></Label>
+                <Label Text="{Binding Clue}" TextColor="White" FontSize="15"></Label>
             </StackLayout>
+            <Frame Grid.Row="3" BackgroundColor="#353535"></Frame>
         </Grid>
         </DataTemplate>
     </syncfusion:SfListView.ItemTemplate>

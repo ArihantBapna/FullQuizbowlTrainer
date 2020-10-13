@@ -47,7 +47,7 @@
                     <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="#284B63" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="#353535" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
                     </Grid>
                 </StackLayout>
-                <StackLayout Grid.Row="1" BackgroundColor="#353535" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
+                <StackLayout Padding="10,0" Grid.Row="1" BackgroundColor="#353535" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
                     <StackLayout Orientation="Horizontal">
                         <Label TextColor="White" Text="Answer:"></Label>
                         <Label TextColor="White" Text="{Binding FinalAnswer}"></Label>
