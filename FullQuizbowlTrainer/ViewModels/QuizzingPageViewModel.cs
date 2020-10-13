@@ -9,6 +9,8 @@ using FullQuizbowlTrainer.Models;
 using FullQuizbowlTrainer.Services.Database;
 using FullQuizbowlTrainer.Services.Reading;
 using FullQuizbowlTrainer.Services.Selector;
+using FullQuizbowlTrainer.Services.Web;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FullQuizbowlTrainer.ViewModels
@@ -150,6 +152,8 @@ namespace FullQuizbowlTrainer.ViewModels
         public UserProfile UserProfile { get; set; }
 
         string UserBuzzedText { get; set; }
+
+        public string CurrentClue { get; set; }
         
         public QuizzingPageViewModel(UserProfile userProfile)
         {
@@ -209,6 +213,23 @@ namespace FullQuizbowlTrainer.ViewModels
             ans.Negs = Ans.Negs;
             ans.Rating = Ans.Rating;
             ans.Score = Ans.Score;
+
+            AnsweredRest ansRest = new AnsweredRest();
+            ansRest.answerid = ans.AnswerID;
+            ansRest.buzzed = ans.Answer;
+            ansRest.clue = CurrentClue;
+            ansRest.questionid = ans.QuestionID;
+            ansRest.rating = ans.Rating;
+            ansRest.score = ans.Score;
+            ansRest.userid = Xamarin.Essentials.Preferences.Get("userid", 243);
+
+            var current = Connectivity.NetworkAccess;
+            if(current == NetworkAccess.Internet)
+            {
+                RestService r = new RestService();
+                await r.Get("/wake");
+                await r.Post("/postdata", ansRest);
+            }
 
             DatabaseManager dbM = new DatabaseManager();
             await dbM.InsertAnsweredRead(ans);

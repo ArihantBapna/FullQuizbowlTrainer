@@ -25,7 +25,9 @@ namespace FullQuizbowlTrainer.Services.Reading
         public async void ReadAQuestion(QuizzingPageViewModel qVm)
         {
             WordsOfQuestions = sentences[sentenceAt].Split(' ');
-            
+
+            qVm.CurrentClue = sentences[sentenceAt];
+
             for(int i = positionAt; i < WordsOfQuestions.Length; i++)
             {
                 await Task.Delay(WordsOfQuestions[i].Length * 40);
