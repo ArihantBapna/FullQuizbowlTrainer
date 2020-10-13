@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" x:Class="FullQuizbowlTrainer.Views.QuizzingPage">
+<ContentPage Title="Quizzing" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" x:Class="FullQuizbowlTrainer.Views.QuizzingPage">
     <ContentPage.Content>
-        <Grid RowSpacing="10" BackgroundColor="AntiqueWhite">
+        <Grid RowSpacing="10" BackgroundColor="#D9D9D9">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
@@ -9,15 +9,15 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" BackgroundColor="SandyBrown" Orientation="Horizontal">
+            <StackLayout Grid.Row="0" BackgroundColor="#353535" Orientation="Horizontal">
                 <Label TextColor="White" Text="{Binding Question.Tournament, StringFormat='{0}  |'}" VerticalTextAlignment="Center"></Label>
                 <Label TextColor="White" Text="{Binding Question.Category, StringFormat='{0}  |'}" VerticalTextAlignment="Center"></Label>
                 <Label TextColor="White" Text="{Binding Question.Subcategory, StringFormat='{0}  |'}" VerticalTextAlignment="Center"></Label>
                 <Label TextColor="White" Text="{Binding Question.Difficulty, StringFormat='{0} '}" VerticalTextAlignment="Center"></Label>
             </StackLayout>
-
+             
             <ScrollView Grid.Row="1" Orientation="Vertical">
-                <StackLayout BackgroundColor="SandyBrown" Margin="30,0">
+                <StackLayout BackgroundColor="#284B63" Margin="30,0">
                     <Label TextColor="White" Text="{Binding QuestionText}" FontSize="19" Padding="10"></Label>
                 </StackLayout>
             </ScrollView>
@@ -40,14 +40,14 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="BurlyWood" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
-                    <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="BurlyWood"></buttons:SfButton>
-                    <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="BurlyWood" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
+                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
+                    <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="#284B63"></buttons:SfButton>
+                    <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
 
                     <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="BurlyWood" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="SaddleBrown" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
                     </Grid>
                 </StackLayout>
-                <StackLayout Grid.Row="1" BackgroundColor="SandyBrown" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
+                <StackLayout Grid.Row="1" BackgroundColor="#353535" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
                     <StackLayout Orientation="Horizontal">
                         <Label TextColor="White" Text="Answer:"></Label>
                         <Label TextColor="White" Text="{Binding FinalAnswer}"></Label>

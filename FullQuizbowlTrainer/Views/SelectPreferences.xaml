@@ -37,7 +37,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid BackgroundColor="AntiqueWhite">
+        <Grid BackgroundColor="#D9D9D9">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -45,21 +45,21 @@
             <syncfusion:SfListView Grid.Row="0" x:Name="Preferences" VerticalOptions="Start" ItemSpacing="10" SelectionMode="SingleDeselect" SelectedItem="{Binding SelectedPreference}" ItemsSource="{Binding SavedPreferences}">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10" BackgroundColor="Crimson">
+                        <Grid Padding="10" BackgroundColor="#284B63">
                             <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="White"></Label>
                         </Grid>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
                 <syncfusion:SfListView.SelectedItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10" BackgroundColor="DarkOrange">
+                        <Grid Padding="10" BackgroundColor="#353535">
                             <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="White"></Label>
                         </Grid>
                     </DataTemplate>
                 </syncfusion:SfListView.SelectedItemTemplate>
             </syncfusion:SfListView>
-            <StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="End" BackgroundColor="AntiqueWhite">
-                <chart:SfChart AreaBackgroundColor="AntiqueWhite" HeightRequest="300" VerticalOptions="Start">
+            <StackLayout Grid.Row="1" Orientation="Vertical" VerticalOptions="End" BackgroundColor="#D9D9D9">
+                <chart:SfChart AreaBackgroundColor="#D9D9D9" HeightRequest="300" VerticalOptions="Start">
                     <chart:DoughnutSeries EnableAnimation="True" ListenPropertyChange="True" DoughnutCoefficient="0.6" CircularCoefficient="0.5" ItemsSource ="{Binding PresetData}" XBindingPath="Name" YBindingPath="Percent" ConnectorLineType="Bezier" EnableSmartLabels="True" DataMarkerPosition="OutsideExtended"> 
                         <chart:DoughnutSeries.ColorModel>
                             <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
@@ -71,13 +71,13 @@
                 </chart:SfChart>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <buttons:SfButton CornerRadius="3" Clicked="Start_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="BurlyWood" Text="Start"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="Start_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="#284B63" Text="Start"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
-                        <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="BurlyWood" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="#284B63" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="End">
-                        <buttons:SfButton CornerRadius="3" Clicked="DeleteButton_Clicked"  BackgroundColor="BurlyWood" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="DeleteButton_Clicked"  BackgroundColor="#284B63" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
