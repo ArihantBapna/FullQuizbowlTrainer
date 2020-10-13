@@ -5,7 +5,7 @@
             <StackLayout BackgroundColor="Transparent" Orientation="Vertical" Spacing="15" VerticalOptions="Center" Margin="0,0" HorizontalOptions="Fill">
                 <StackLayout Orientation="Vertical">
                     <Label Text="Power 15" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" VerticalOptions="Start" FontSize="60"></Label>
-                    <Label Text="It's not a game, it's a lifestyle" FontAttributes="Italic" HorizontalOptions="Center" TextColor="Black" VerticalOptions="Start"></Label>
+                    <Label Text="Game the System" FontAttributes="Italic" HorizontalOptions="Center" TextColor="Black" VerticalOptions="Start"></Label>
                 </StackLayout>
                 <Button Clicked="OnButtonClicked" HeightRequest="50"  Text="Quiz" FontFamily="Futura" FontSize="20" FontAttributes="Bold" TextColor="White" BackgroundColor="#284B63" Margin="20,0"></Button>
                 <Button Clicked="Button_Clicked_1" HeightRequest="50" Text="Previously Answered" FontFamily="Futura" FontAttributes="Bold" FontSize="20" TextColor="White" BackgroundColor="#284B63" Margin="40,0"></Button>
