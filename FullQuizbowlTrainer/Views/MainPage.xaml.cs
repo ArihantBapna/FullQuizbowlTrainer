@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Timers;
 using FullQuizbowlTrainer.Models;
 using FullQuizbowlTrainer.Services.Database;
@@ -40,6 +41,12 @@ namespace FullQuizbowlTrainer.Views
             DatabaseManager dbM = new DatabaseManager();
             List<Answered> answerList = await dbM.GetAllAnswereds();
             await Navigation.PushAsync(new StatsPage(answerList));
+        }
+
+        void Logout_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Xamarin.Essentials.Preferences.Set("userid", 243);
+            Application.Current.MainPage = new NavigationPage(new LoginPage());
         }
     }
 

@@ -30,7 +30,7 @@ namespace FullQuizbowlTrainer.Services.Reading
 
             for(int i = positionAt; i < WordsOfQuestions.Length; i++)
             {
-                await Task.Delay(WordsOfQuestions[i].Length * 40);
+                await Task.Delay(WordsOfQuestions[i].Length * 70);
                 qVm.QuestionText += WordsOfQuestions[i] +" ";
                 positionAt += 1;
                 if (!qVm.IsReading)

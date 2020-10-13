@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FullQuizbowlTrainer.Models;
+using FullQuizbowlTrainer.Views;
 using Syncfusion.SfChart.XForms;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -146,39 +147,48 @@ namespace FullQuizbowlTrainer.ViewModels
             TotalAvailable = 100-t;
         }
 
-        public static async void SaveNewPreference(SetCategoriesViewModel vm, INavigation Nav)
+        public static async void SaveNewPreference(SetCategoriesViewModel vm, INavigation Nav, SetCategories sc)
         {
 
-            if (vm.PreferenceName.Contains(","))
+            if(vm.TotalAvailable != 0)
             {
-                await Application.Current.MainPage.DisplayAlert("Error with name", "Please don't use punctuation marks in a preference name.", "Okay");
+                await sc.DisplayAlert("Distribution Error", "Please distribute the points such that the total available is 0", "Okay");
             }
             else
             {
-                string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
-                string keyVal = Preferences.Get("pref_keys", default_key);
-
-                string newKey = "name=" + vm.PreferenceName + ",id=" + vm.Preference.Id + ",";
-
-                Presets lastP = vm.PresetsData[vm.PresetsData.Count - 1];
-                foreach (Presets p in vm.PresetsData)
+                if (vm.PreferenceName.Contains(","))
                 {
-                    if (p != lastP)
-                    {
-                        newKey += p.Percent + ",";
-                    }
-                    else
-                    {
-                        newKey += p.Percent;
-                    }
+                    await Application.Current.MainPage.DisplayAlert("Error with name", "Please don't use punctuation marks in a preference name.", "Okay");
                 }
+                else
+                {
+                    string default_key = "name=Default,id=0,12,17,7,17,5,5,12,2,4,2;name=Second,id=1,14,15,7,17,5,5,12,2,4,2";
+                    string keyVal = Preferences.Get("pref_keys", default_key);
 
-                vm.Preference.PresetData = newKey;
-                keyVal = keyVal + ";" + newKey;
-                Preferences.Set("pref_keys", keyVal);
-                MessagingCenter.Send(vm, "UpdatePresets");
-                await Nav.PopModalAsync();
+                    string newKey = "name=" + vm.PreferenceName + ",id=" + vm.Preference.Id + ",";
+
+                    Presets lastP = vm.PresetsData[vm.PresetsData.Count - 1];
+                    foreach (Presets p in vm.PresetsData)
+                    {
+                        if (p != lastP)
+                        {
+                            newKey += p.Percent + ",";
+                        }
+                        else
+                        {
+                            newKey += p.Percent;
+                        }
+                    }
+
+                    vm.Preference.PresetData = newKey;
+                    keyVal = keyVal + ";" + newKey;
+                    Preferences.Set("pref_keys", keyVal);
+                    MessagingCenter.Send(vm, "UpdatePresets");
+                    await Nav.PopModalAsync();
+                }
             }
+
+            
         }
 
         public static async void SaveEditPreference(SetCategoriesViewModel vm, INavigation Nav)

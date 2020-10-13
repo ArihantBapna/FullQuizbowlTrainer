@@ -26,7 +26,7 @@ namespace FullQuizbowlTrainer.Views
 
         void Save_Clicked(object sender, EventArgs args)
         {
-            if (action == 0) SetCategoriesViewModel.SaveNewPreference((SetCategoriesViewModel)this.BindingContext, Nav);
+            if (action == 0) SetCategoriesViewModel.SaveNewPreference((SetCategoriesViewModel)this.BindingContext, Nav, this);
             else if (action == 1) SetCategoriesViewModel.SaveEditPreference((SetCategoriesViewModel)this.BindingContext, Nav);
         }
 

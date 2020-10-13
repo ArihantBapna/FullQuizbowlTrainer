@@ -71,13 +71,13 @@
                 </chart:SfChart>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="30" VerticalOptions="EndAndExpand" Padding="10">
                     <StackLayout HorizontalOptions="Start">
-                        <buttons:SfButton CornerRadius="3" Clicked="Start_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="#284B63" Text="Start"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="Start_Clicked" IsEnabled="{Binding HasSelectedItem}" BackgroundColor="#353535" Text="Start"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Center">
-                        <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="#284B63" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="EditButton_Clicked" BackgroundColor="#353535" Text="Edit" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                     <StackLayout HorizontalOptions="End">
-                        <buttons:SfButton CornerRadius="3" Clicked="DeleteButton_Clicked"  BackgroundColor="#284B63" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
+                        <buttons:SfButton CornerRadius="3" Clicked="DeleteButton_Clicked"  BackgroundColor="#353535" Text="Delete" IsEnabled="{Binding HasSelectedItem}"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
