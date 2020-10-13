@@ -15,7 +15,11 @@ namespace FullQuizbowlTrainer
 
             //MainPage = new NavigationPage(new MainPage());
             MainPage = new NavigationPage(new LoginPage());
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#353535");
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
+
         }
+
 
         protected override void OnStart()
         {
