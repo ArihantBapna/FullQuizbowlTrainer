@@ -10,7 +10,8 @@ namespace FullQuizbowlTrainer.Services.Web
     public interface IRestService
     {
         Task<string> Get(string uri);
-        Task<string> Post(string uri, AnsweredRest ans);
+        Task<string> PostAnswer(string uri, AnsweredRest ans);
+        Task<int> GetLogin(string uri, Login login);
     }
 
     public class RestService : IRestService
@@ -32,7 +33,18 @@ namespace FullQuizbowlTrainer.Services.Web
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public async Task<string> Post(string uri, AnsweredRest ans)
+        public async Task<int> GetLogin(string uri, Login login)
+        {
+            string json = JsonConvert.SerializeObject(login, Formatting.Indented);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(uri, content);
+            string res =  await response.Content.ReadAsStringAsync();
+            if (res.Equals("Username and password match")) return 0;
+            else if (res.Equals("Incorrect password")) return 1;
+            else return 2;
+        }
+
+        public async Task<string> PostAnswer(string uri, AnsweredRest ans)
         {
             string json = JsonConvert.SerializeObject(ans, Formatting.Indented);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

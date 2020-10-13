@@ -13,8 +13,25 @@ namespace FullQuizbowlTrainer
 
             InitializeComponent();
 
-            //MainPage = new NavigationPage(new MainPage());
-            MainPage = new NavigationPage(new LoginPage());
+            var id = Xamarin.Essentials.Preferences.Get("userid", 243);
+            var conn = Xamarin.Essentials.Connectivity.NetworkAccess;
+            
+            if(id == 243)
+            {
+                if (conn == Xamarin.Essentials.NetworkAccess.Internet)
+                {
+                    MainPage = new NavigationPage(new LoginPage());
+                }
+                else
+                {
+                    MainPage = new NavigationPage(new MainPage());
+                }
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }            
+
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#353535");
             ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
 

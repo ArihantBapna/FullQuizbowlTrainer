@@ -224,7 +224,7 @@ namespace FullQuizbowlTrainer.ViewModels
             {
                 RestService r = new RestService();
                 await r.Get("/wake");
-                await r.Post("/postdata", ansRest);
+                await r.PostAnswer("/postdata", ansRest);
             }
 
             DatabaseManager dbM = new DatabaseManager();

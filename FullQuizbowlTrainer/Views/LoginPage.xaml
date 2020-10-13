@@ -4,11 +4,11 @@
         <Grid BackgroundColor="#D9D9D9">
             <StackLayout Orientation="Vertical" VerticalOptions="Center">
                 <StackLayout Orientation="Vertical" Margin="30,0">
-                    <inputLayout:SfTextInputLayout FocusedColor="#284B63" Hint="User Id" ContainerType="Outlined"><syncfusion:SfNumericTextBox Value="{Binding Id}" TextColor="Black"/></inputLayout:SfTextInputLayout>
-                    <inputLayout:SfTextInputLayout FocusedColor="#284B63" EnablePasswordVisibilityToggle="true" Hint="Password" ContainerType="Outlined"><Entry IsPassword="True" Text="{Binding Pwd}" TextColor="Black"/></inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout x:Name="UserInput" FocusedColor="#284B63" Hint="User Id" ContainerType="Outlined"><syncfusion:SfNumericTextBox Value="{Binding Id}" TextColor="Black"/></inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout x:Name="PwdInput" FocusedColor="#284B63" EnablePasswordVisibilityToggle="true" Hint="Password" ContainerType="Outlined"><Entry IsPassword="True" Text="{Binding Pwd}" TextColor="Black"/></inputLayout:SfTextInputLayout>
                 </StackLayout>
                 <StackLayout Margin="40,0">
-                    <Button Text="Login" BackgroundColor="#284B63" TextColor="White"></Button>
+                    <Button Clicked="Button_Clicked" x:Name="LoginButton" Text="Login" BackgroundColor="#284B63" TextColor="White"></Button>
                 </StackLayout>
             </StackLayout>
             <RelativeLayout VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="32" BackgroundColor="#353535">

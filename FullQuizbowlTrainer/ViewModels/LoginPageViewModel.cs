@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using FullQuizbowlTrainer.Models;
+using FullQuizbowlTrainer.Services.Web;
 
 namespace FullQuizbowlTrainer.ViewModels
 {
@@ -43,6 +45,16 @@ namespace FullQuizbowlTrainer.ViewModels
         public LoginPageViewModel()
         {
 
+        }
+
+        public async Task<int> DoLogin()
+        {
+            Login l = new Login();
+            l.userid = Id;
+            l.password = Pwd;
+            RestService r = new RestService();
+            await r.Get("/wake");
+            return await r.GetLogin("/getlogin", l);
         }
 
         public virtual void OnPropertyChanged(string propertyName)
