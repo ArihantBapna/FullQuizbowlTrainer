@@ -40,7 +40,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                    <buttons:SfButton Text="Report" Grid.Row="0" Grid.Column="0" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
+                    <buttons:SfButton Text="Report" Clicked="Report_Clicked" Grid.Row="0" Grid.Column="0" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
                     <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="#284B63"></buttons:SfButton>
                     <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
 
@@ -63,7 +63,7 @@
                 </StackLayout>
                 </Grid> 
             </ScrollView>
-
+                 
         </Grid>
     </ContentPage.Content>
 </ContentPage>

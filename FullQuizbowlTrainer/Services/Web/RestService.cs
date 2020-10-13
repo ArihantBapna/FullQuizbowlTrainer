@@ -12,6 +12,7 @@ namespace FullQuizbowlTrainer.Services.Web
         Task<string> Get(string uri);
         Task<string> PostAnswer(string uri, AnsweredRest ans);
         Task<int> GetLogin(string uri, Login login);
+        Task<bool> Report(Report report);
     }
 
     public class RestService : IRestService
@@ -51,6 +52,18 @@ namespace FullQuizbowlTrainer.Services.Web
 
             var response = await httpClient.PostAsync(uri, content);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<bool> Report(Report report)
+        {
+            string json = JsonConvert.SerializeObject(report, Formatting.Indented);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync("/report", content);
+            string res = await response.Content.ReadAsStringAsync();
+
+            if (res.Contains("success")) return true;
+            else return false;
         }
     }
 }
