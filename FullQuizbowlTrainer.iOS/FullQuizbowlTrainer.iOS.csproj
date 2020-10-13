@@ -161,4 +161,7 @@
   <ItemGroup>
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\QAData2.db" />
+  </ItemGroup>
 </Project>
