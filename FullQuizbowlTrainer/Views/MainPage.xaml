@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage BackgroundColor="#284B63" Title="Power 15" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FullQuizbowlTrainer.Views.MainPage">
+<ContentPage BackgroundColor="#284B63" Title="Power 15 (Beta 0.9)" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FullQuizbowlTrainer.Views.MainPage">
     <ContentPage.Content>
         <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="#D9D9D9">
             <StackLayout BackgroundColor="Transparent" Orientation="Vertical" Spacing="15" VerticalOptions="Center" Margin="0,0" HorizontalOptions="Fill">
