@@ -3,7 +3,6 @@
     <ContentPage.Content>
         <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="AntiqueWhite">
             <StackLayout BackgroundColor="AntiqueWhite" Orientation="Vertical" Spacing="20" VerticalOptions="CenterAndExpand" Margin="30,0" HorizontalOptions="Fill">
-                <Button Clicked="Button_Clicked"  Text="Run Test" TextColor="White" BackgroundColor="BurlyWood" Margin="30,0" VerticalOptions="Start"></Button>
                 <Button Clicked="OnButtonClicked" Text="Quiz" TextColor="White" BackgroundColor="BurlyWood" Margin="10,0"></Button>
                 <Button Clicked="Button_Clicked_1" Text="Previously Answered" TextColor="White" BackgroundColor="BurlyWood" Margin="20,0"></Button>
             </StackLayout>
