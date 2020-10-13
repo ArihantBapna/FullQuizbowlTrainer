@@ -19,6 +19,7 @@ namespace FullQuizbowlTrainer.Models
         public double Score { get; set; }
         public int QuestionID { get; set; }
         public string Correct { get; set; }
+        public string Clue { get; set; }
 
         private PropertyInfo[] _PropertyInfos = null;
 

@@ -203,6 +203,7 @@ namespace FullQuizbowlTrainer.ViewModels
             ans.AnswerID = Question.AnswerID;
             ans.QuestionID = Question.ID;
             ans.Category = Question.Category;
+            ans.Clue = CurrentClue;
 
             var Ans = UserProfile.Answers.FirstOrDefault(x => x.ID == Answer.ID);
             ans.Difficulty = Ans.Difficulty;

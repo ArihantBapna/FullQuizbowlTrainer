@@ -44,7 +44,7 @@
                     <buttons:SfButton Text="{Binding ButtonState}" Grid.Row="0" Grid.Column="1" Clicked="Buzz_Clicked" BackgroundColor="#284B63"></buttons:SfButton>
                     <buttons:SfButton Text="Next" Clicked="Next_Clicked" Grid.Row="0" Grid.Column="2" BackgroundColor="#284B63" IsEnabled="{Binding IsCompleted}"></buttons:SfButton>
 
-                    <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="BurlyWood" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="SaddleBrown" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" FocusedColor="#284B63" ContainerType="Outlined" Hint="Answer"><Entry x:Name="AnswerEntry" TextColor="#353535" Text="{Binding AnsweredText}"/></inputLayout:SfTextInputLayout>
                     </Grid>
                 </StackLayout>
                 <StackLayout Grid.Row="1" BackgroundColor="#353535" HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Vertical">
