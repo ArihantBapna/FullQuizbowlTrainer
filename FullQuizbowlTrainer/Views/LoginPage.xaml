@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms" xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" x:Class="FullQuizbowlTrainer.Views.LoginPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#D9D9D9">
+            <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                <StackLayout Orientation="Vertical" Margin="30,0">
+                    <inputLayout:SfTextInputLayout FocusedColor="#284B63" Hint="User Id" ContainerType="Outlined"><syncfusion:SfNumericTextBox Value="{Binding Id}" TextColor="Black"/></inputLayout:SfTextInputLayout>
+                    <inputLayout:SfTextInputLayout FocusedColor="#284B63" EnablePasswordVisibilityToggle="true" Hint="Password" ContainerType="Outlined"><Entry IsPassword="True" Text="{Binding Pwd}" TextColor="Black"/></inputLayout:SfTextInputLayout>
+                </StackLayout>
+                <StackLayout Margin="30,0">
+                    <Button Text="Login" BackgroundColor="#284B63" TextColor="White"></Button>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

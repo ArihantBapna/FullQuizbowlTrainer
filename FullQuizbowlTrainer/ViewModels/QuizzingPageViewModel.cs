@@ -172,11 +172,7 @@ namespace FullQuizbowlTrainer.ViewModels
 
         public async void CheckAnswer()
         {
-            foreach(char c in AnsweredText.ToCharArray())
-            {
-                UserBuzzedText += c.ToString();
-            }
-
+            UserBuzzedText = AnsweredText + "";
             var l = new NormalizedLevenshtein();
             QuestionText = Question.Question;
             FinalAnswer = Question.Answer;
