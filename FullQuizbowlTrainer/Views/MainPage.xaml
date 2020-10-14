@@ -10,7 +10,6 @@
                 <Button Clicked="OnButtonClicked" HeightRequest="50"  Text="Quiz" FontFamily="Futura" FontSize="20" FontAttributes="Bold" TextColor="White" BackgroundColor="#284B63" Margin="20,0"></Button>
                 <Button Clicked="Button_Clicked_1" HeightRequest="50" Text="Previously Answered" FontFamily="Futura" FontAttributes="Bold" FontSize="20" TextColor="White" BackgroundColor="#284B63" Margin="40,0"></Button>
                 <Button Clicked="Logout_Clicked" HeightRequest="50" Text="Logout" FontFamily="Futura" FontAttributes="Bold" FontSize="20" TextColor="White" BackgroundColor="#353535" Margin="55,0"></Button>
-
             </StackLayout>
         </Grid>
     </ContentPage.Content>
