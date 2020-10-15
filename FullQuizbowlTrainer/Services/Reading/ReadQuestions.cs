@@ -64,7 +64,7 @@ namespace FullQuizbowlTrainer.Services.Reading
                 }
                 else
                 {
-                    await Task.Delay(5000);
+                    await Task.Delay(7000);
                     if (!qVm.IsCompleted)
                     {
                         qVm.IsCompleted = true;
