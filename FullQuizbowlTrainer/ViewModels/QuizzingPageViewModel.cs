@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using F23.StringSimilarity;
 using FullQuizbowlTrainer.Models;
+using FullQuizbowlTrainer.Services.Checking;
 using FullQuizbowlTrainer.Services.Database;
 using FullQuizbowlTrainer.Services.Reading;
 using FullQuizbowlTrainer.Services.Selector;
@@ -173,7 +174,7 @@ namespace FullQuizbowlTrainer.ViewModels
         public async void CheckAnswer()
         {
             UserBuzzedText = AnsweredText + "";
-            var l = new NormalizedLevenshtein();
+            
             QuestionText = Question.Question;
             FinalAnswer = Question.Answer;
             Alternate = Question.Alternate;
@@ -181,7 +182,16 @@ namespace FullQuizbowlTrainer.ViewModels
             IsCompleted = true;
             Question.Answered += 1;
 
-            var similarity = 1 - l.Distance(AnsweredText, Question.Answer);
+            await Check();
+        }
+
+        public async Task Check()
+        {
+            string userText = Stopwords.RemoveStopwords(AnsweredText);
+            string ansText = Stopwords.RemoveStopwords(Question.Answer);
+
+            var l = new NormalizedLevenshtein();
+            var similarity = 1 - l.Distance(userText, ansText);
 
             if (similarity >= 0.8)
             {

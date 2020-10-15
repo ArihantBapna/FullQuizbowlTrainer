@@ -51,7 +51,7 @@ namespace FullQuizbowlTrainer.Services.Selector
             {
                 if(a.Category == SelectedCat.Id)
                 {
-                    if(a.Rating > (SelectedCat.User-150) && a.Rating < (SelectedCat.User+150))
+                    if(a.Rating > (SelectedCat.User-150) && a.Rating < (SelectedCat.User+250))
                     {
                         SubList.Add(a);
                     }
@@ -60,7 +60,15 @@ namespace FullQuizbowlTrainer.Services.Selector
             
             SubList.Sort((x, y) => x.Score.CompareTo(y.Score));
             Random r = new Random();
-            int newR = r.Next(SubList.Count - 10, SubList.Count - 1);
+            int newR = 0;
+            if (SubList.Count > 10)
+            {
+                 newR = r.Next(SubList.Count - 10, SubList.Count - 1);
+            }
+            else
+            {
+                newR = r.Next(0, SubList.Count - 1);
+            }
             return SubList[newR];
         }
 
@@ -69,7 +77,10 @@ namespace FullQuizbowlTrainer.Services.Selector
             DatabaseManager dbM = new DatabaseManager();
             List<Questions> availQuestions = await dbM.GetQuestionsFromAnswerId(SelectedAnswer.ID);
             availQuestions.Sort((x, y) => x.Answered.CompareTo(y.Answered));
-            SelectedQuestion = availQuestions.First();
+
+            Random r = new Random();
+            int newR = r.Next(0, availQuestions.Count);
+            SelectedQuestion = availQuestions[newR];
             return SelectedQuestion;
         }
     }

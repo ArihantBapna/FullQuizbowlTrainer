@@ -36,6 +36,7 @@
     <Folder Include="Services\Selector\" />
     <Folder Include="Services\Reading\" />
     <Folder Include="Services\Web\" />
+    <Folder Include="Services\Checking\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Models\Categories.cs">
