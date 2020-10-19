@@ -91,7 +91,7 @@ namespace FullQuizbowlTrainer.ViewModels
                 OnPropertyChanged("AnsweredText");
                 if (string.IsNullOrEmpty(AnsweredText))
                 {
-                    ButtonState = "Withdraw";
+                    if(!IsCompleted) ButtonState = "Withdraw";
                 }
                 else
                 {
@@ -140,7 +140,19 @@ namespace FullQuizbowlTrainer.ViewModels
             set
             {
                 isCompleted = value;
+                IsNotCompleted = !isCompleted;
                 OnPropertyChanged("IsCompleted");
+            }
+        }
+
+        private bool isNotCompleted;
+        public bool IsNotCompleted
+        {
+            get { return isNotCompleted; }
+            set
+            {
+                isNotCompleted = value;
+                OnPropertyChanged("IsNotComplted");
             }
         }
 
@@ -159,10 +171,11 @@ namespace FullQuizbowlTrainer.ViewModels
         public QuizzingPageViewModel(UserProfile userProfile)
         {
             UserProfile = userProfile;
+            IsCompleted = true;
+            IsNotCompleted = false;
             NextQuestion();
             QuestionText = "This is where the question will start reading";
             ButtonState = "Start Reading";
-            
         }
 
         public void Read()
@@ -307,12 +320,12 @@ namespace FullQuizbowlTrainer.ViewModels
             Question = answerLine.SelectedQuestion;
             AnsweredText = "";
             isStarted = true;
-            ButtonState = "Start Reading";
             Prompts = "";
             Alternate = "";
             IsCompleted = false;
             FinalAnswer = "";
             Reader = new ReadQuestions(Question, this);
+            ButtonState = "Start Reading";
         }
 
         public virtual void OnPropertyChanged(string propertyName)

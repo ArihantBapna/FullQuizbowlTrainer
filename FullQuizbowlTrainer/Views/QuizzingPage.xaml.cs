@@ -13,7 +13,8 @@ namespace FullQuizbowlTrainer.Views
         public QuizzingPage(UserProfile userProfile)
         {
             InitializeComponent();
-            this.BindingContext = new QuizzingPageViewModel(userProfile);;
+            this.BindingContext = new QuizzingPageViewModel(userProfile);
+            
         }
 
         void Buzz_Clicked(System.Object sender, System.EventArgs e)
@@ -37,6 +38,7 @@ namespace FullQuizbowlTrainer.Views
                     if (!string.IsNullOrWhiteSpace(qVm.AnsweredText))
                     {
                         qVm.CheckAnswer();
+                        MainButton.IsEnabled = false;
                     }
                     else
                     {
@@ -52,6 +54,7 @@ namespace FullQuizbowlTrainer.Views
         {
             QuizzingPageViewModel qVm = (QuizzingPageViewModel)this.BindingContext;
             qVm.NextQuestion();
+            MainButton.IsEnabled = true;
         }
 
         async void Report_Clicked(System.Object sender, System.EventArgs e)
