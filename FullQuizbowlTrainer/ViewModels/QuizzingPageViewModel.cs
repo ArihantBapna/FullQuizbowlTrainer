@@ -75,7 +75,14 @@ namespace FullQuizbowlTrainer.ViewModels
                 if (IsReading) ButtonState = "Buzz";
                 else
                 {
-                    if (string.IsNullOrEmpty(AnsweredText)) ButtonState = "Withdraw";
+                    if (string.IsNullOrEmpty(AnsweredText))
+                    {
+                        if (!IsCompleted)
+                        {
+                            ButtonState = "Withdraw";
+                        }
+                        else { ButtonState = "Start Buzzzing"; }
+                    }
                     else ButtonState = "Submit";
                 }
             }
@@ -92,6 +99,7 @@ namespace FullQuizbowlTrainer.ViewModels
                 if (string.IsNullOrEmpty(AnsweredText))
                 {
                     if(!IsCompleted) ButtonState = "Withdraw";
+                    else { ButtonState = "Start Buzzzing"; }
                 }
                 else
                 {
@@ -174,7 +182,7 @@ namespace FullQuizbowlTrainer.ViewModels
             IsCompleted = true;
             IsNotCompleted = false;
             NextQuestion();
-            QuestionText = "This is where the question will start reading";
+            QuestionText = "This is where the question will start reading. Press Withdraw to begin";
             ButtonState = "Start Reading";
         }
 
